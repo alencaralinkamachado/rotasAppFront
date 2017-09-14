@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Rua } from '../shared';
+import { Rua, Cliente } from '../shared';
 
 
 
 @Injectable()
 export class ClienteService {
 
-  private readonly BASE_URL = "http://localhost:8080/appRotas-1.0/rua/ruas/cidade/1";
-  
+  private readonly BASE_URL = "http://localhost:8080/appRotas-1.0";
+  private readonly RUA_URL = this.BASE_URL + '/rua/ruas/cidade/1';
+  private readonly CLIENTE_URL = this.BASE_URL + '/cliente';
+  private headers : Headers;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) { 
+    this.headers = new Headers();
+    this.headers.append('Content-Type','application/json');
+  }
 
   listarRuas() : Observable<Rua[]>{
-    return this.http.get(this.BASE_URL)
+    return this.http.get(this.RUA_URL)
     .map(response => response.json() as Rua)
     .catch(error => Observable.throw(error));
   }
+
+ cadastra(cliente : Cliente) : Observable<String>{
+   return this.http.post(this.CLIENTE_URL, JSON.stringify(cliente),{headers : this.headers})
+   .map( ()=> ("Cliente cadastrado com sucesso") );
+ }
 
 }
