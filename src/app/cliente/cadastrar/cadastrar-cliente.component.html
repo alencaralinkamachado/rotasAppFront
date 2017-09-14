@@ -1,0 +1,108 @@
+<div class="container">
+
+  <h1>Cadastrar Clientes</h1>
+  
+  
+  <form #formCliente="ngForm">
+   <div class="well">
+    <div class="row"> 
+
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" class="form-control" id="nome" name="nome"  placeholder="nome cliente"
+          [(ngModel)] = "cliente.nome"
+          #nome="ngModel"
+          minlength="5"
+          required>
+
+          <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert alert-danger">
+            <div [hidden]="!nome.errors.required" > Nome obrigatório </div>
+            <div [hidden]="!nome.errors.minlength" > Mínimo 5 caracteres </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+          </div>
+        </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="codCorreio">Código Correio:</label>
+          <input type="number" class="form-control"  name="codCorreio" id="codCorreio" placeholder="código do correio" required
+          [(ngModel)]="cliente.codCorreio">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="ondeDeixar">Onde deixar:</label>
+        <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?" required
+        [(ngModel)]="cliente.ondeDeixar">
+      </div>
+    </div>
+    
+    <legend>
+     <strong> Endereço </strong>
+    </legend>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="cidade">Cidade:</label>
+                <input type="text" class="form-control" name="cidade" id="cidade" value="São Gabriel" 
+                [(ngModel)]="cliente.cidade.nome" disabled>
+              </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+          <div class="form-group">
+              <label for="rua">Rua:</label>           
+              <select name="rua" class="form-control" [(ngModel)]="cliente.rua.id" required>
+                <option *ngFor="let r of ruas" [value]="r.id"> 
+                 {{r.id}} - {{r.nome}}
+                </option>
+              </select>
+
+            </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+              <label for="numero">Número:</label>
+              <input type="number" class="form-control" name="numero" id="numero" placeholder="N° casa" required
+              [(ngModel)]="cliente.numero">
+          </div>
+      </div>
+    </div>
+    <legend>
+      <strong>  Coordenadas </strong>
+    </legend>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="latitude">Latitude:</label>
+              <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" required
+              [(ngModel)]="cliente.latitude">
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="latitude">Longitude:</label>
+              <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" required
+              [(ngModel)]="cliente.longitude">
+          </div>          
+      </div>
+    </div>
+  </div>
+    <div class="form-group text-center">
+        <button type="submit" class=" btn btn-success" [disabled]="!formCliente.form.valid" (click)="cadastrar()" >Cadastrar</button>
+    </div>
+    
+  </form>
+
+</div>
+
