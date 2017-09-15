@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ClienteModule } from './cliente';
-
+import { MapaModule } from './mapa';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import { ClienteModule } from './cliente';
   imports: [
     BrowserModule,
     ClienteModule,
+    MapaModule,
     AppRoutingModule
   ],
   providers: [],

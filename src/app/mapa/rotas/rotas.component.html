@@ -1,0 +1,137 @@
+ 
+  <div class="row">
+    <div class="col-md-8">
+        <ngui-map style="height:100vh; width:100%;" zoom="13"  center="-30.3486032, -54.3453789" > 
+        
+          <marker *ngFor="let cli of clientes" [position]="[cli.latitude, cli.longitude]" draggable="true" (click)="clicked($event, cli)">
+              <info-window id="iw">
+                  <div *ngIf="marker.display">
+                    lat: {{ marker.lat }}, lng: {{ marker.lng }} - {{cli.nome}}
+                  </div>
+                  <button (click)="hideMarkerInfo()">Hide Info</button>
+                </info-window>
+          </marker>
+         <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
+          <marker [position]="[-30.342013, -54.339090]" ></marker>
+          <marker [position]="[-30.331457, -54.317887]" ></marker> -->
+          
+        </ngui-map>
+        <h1>Marker With Custom Icon</h1>
+        <h1>Custom Marker</h1>
+        <ngui-map center="Brampton, Canada">
+          <custom-marker position="Brampton, Canada">
+            <div><b>Hi, USA</b>
+              <img src="http://icons.iconarchive.com/icons/custom-icon-design/2014-world-cup-flags/32/USA-icon.png" />
+            </div>
+          </custom-marker>
+          <marker position="Brampton, Canada"></marker>
+        </ngui-map>
+    </div>
+    <div class="col-md-4">
+
+
+        <h3>Dados Clientes</h3>
+        
+        
+        <form >
+         <div class="well">
+          <div class="row"> 
+      
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome"  placeholder="nome cliente">
+              </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="cpf">CPF:</label>
+                  <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+                </div>
+              </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="codCorreio">Cód Correio:</label>
+                <input type="number" class="form-control"  name="codCorreio" id="codCorreio" placeholder="código do correio" >
+              </div>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="ondeDeixar">Onde deixar:</label>
+              <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?">
+            </div>
+          </div>
+          
+          <legend>
+           <strong> Endereço </strong>
+          </legend>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="cidade">Cidade:</label>
+                      <input type="text" class="form-control" name="cidade" id="cidade" value="São Gabriel" >
+                    </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="rua">Rua:</label>           
+                    <select name="rua" class="form-control" >
+                      <!--<option *ngFor="let r of ruas" [value]="r.id"> 
+                       {{r.id}} - {{r.nome}}
+                      </option>-->
+                    </select>
+      
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="numero">Número:</label>
+                    <input type="number" class="form-control" name="numero" id="numero" placeholder="N° casa"  >
+                </div>
+            </div>
+          </div>
+          <legend>
+            <strong>  Coordenadas </strong>
+          </legend>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="latitude">Latitude:</label>
+                    <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" >
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="latitude">Longitude:</label>
+                    <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" >
+                </div>          
+            </div>
+          </div>
+        </div>
+          <div class="form-group text-center">
+              <button type="submit" class=" btn btn-success"  >Cadastrar</button>
+          </div>
+          
+        </form>
+
+    </div>
+  </div> 
+
+ <!-- <ngui-map 
+  zoom="13" 
+  center="37.775, -122.434" 
+  (mapReady$)="onMapReady($event)"
+  (mapClick)="onMapClick($event)"
+  (idle)="onIdle($event)"
+  mapTypeId="satellite">
+    <marker *ngFor="let pos of positions" 
+      [position]="pos"
+      (initialized$)="onMarkerInit($event)"></marker>
+</ngui-map> -->
+ 
+ 
+

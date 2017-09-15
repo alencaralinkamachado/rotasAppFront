@@ -30,4 +30,10 @@ export class ClienteService {
    .map( ()=> ("Cliente cadastrado com sucesso") );
  }
 
+ listaClientes() : Observable<Cliente[]>{
+   return this.http.get(this.CLIENTE_URL+'/clientes')
+   .map(response => response.json() as Cliente)
+   .catch(error => Observable.throw(error));
+ }
+
 }
