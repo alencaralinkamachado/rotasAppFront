@@ -31,16 +31,51 @@ export class RotasComponent implements OnInit {
     display: true,
     lat: null,
     lng: null,
+    title : null,
     cli : null
   };
 
   cliente : Cliente;
 
-  clicked({target: marker}) {
+  teste(){
+    console.log('novaLat --- >');
+    
+    
+    }
+
+    moveuPonto({target: panorama}){
+    console.log('novaLat --- >');
+    console.log('novaLng --- >'+ panorama.getPosition());
+    //panorama = new google.maps.StreetViewPanorama(document.getElementById('sv'));
+    
+    }
+    posicao({target: panorama}){
+      console.log('posicao ...');
+      console.log('posicao --- >'+ panorama.getPosition());
+      panorama = new google.maps.StreetViewPanorama(document.getElementById('sv'));
+      
+      }
+
+    cetarCoordenadas = false;
+
+    atualizar() : void{
+      this.cetarCoordenadas = false;
+    }
+
+    permiterMoverPonto({target: marker}){
+      marker.setDraggable(true);
+      this.cetarCoordenadas = true;
+    }
+
+  clicked({target: marker}, cli: Cliente) {
     this.marker.lat = marker.getPosition().lat();
     this.marker.lng = marker.getPosition().lng();
-    
-    console.log(marker.cli);
+    this.marker.title = marker.getTitle();
+    console.log('---> '+cli.nome);
+    //console.log('getTitle() .... '+marker.getTitle());
+    //console.log(marker.cli);
+    marker.setTitle('teste');
+    //marker.setDraggable(true);
     marker.nguiMapComponent.openInfoWindow('iw', marker);
   }
 

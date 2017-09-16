@@ -1,9 +1,46 @@
  
   <div class="row">
     <div class="col-md-8">
-        <ngui-map style="height:100vh; width:100%;" zoom="13"  center="-30.3486032, -54.3453789" > 
+
+        <div *ngIf="cetarCoordenadas">
+            <h1>Map With StreetView  {{ marker.lat }}</h1>
+            <ngui-map 
+              center="{{ marker. lat }}, {{ marker.lng }}"
+              zoom="18"
+              map-type-id="MapTypeId.SATELLITE"
+              tilt="45" 
+              >
+           
+                  <street-view-panorama 
+                  position="{{ marker. lat }}, {{ marker.lng }}"
+                  pov="{heading: 165, pitch: 0}"
+                  id="te"
+                  zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
         
-          <marker *ngFor="let cli of clientes" [position]="[cli.latitude, cli.longitude]" draggable="true" (click)="clicked($event, cli)">
+              
+               
+             </street-view-panorama>
+            </ngui-map>
+              
+
+           <!-- 
+             <div id="sv"></div>  
+             streetView="StreetViewPanorama( document.querySelector('div#sv'), {position:new google.maps.LatLng({{ marker. lat }}, {{ marker.lng }})})"
+.addListener('position_changed', function() { moveuPonto($event);})
+
+             <street-view-panorama
+               position="{{ marker. lat }}, {{ marker.lng }}"
+               pov="{heading: 165, pitch: 0}"
+               zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
+                
+              </street-view-panorama>
+            -->
+
+          </div>
+
+        <ngui-map style="height:100vh; width:100%;" zoom="14"  center="-30.3486032, -54.3453789" > 
+        
+          <marker *ngFor="let cli of clientes" (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
               <info-window id="iw">
                   <div *ngIf="marker.display">
                     lat: {{ marker.lat }}, lng: {{ marker.lng }} - {{cli.nome}}
@@ -16,16 +53,10 @@
           <marker [position]="[-30.331457, -54.317887]" ></marker> -->
           
         </ngui-map>
-        <h1>Marker With Custom Icon</h1>
-        <h1>Custom Marker</h1>
-        <ngui-map center="Brampton, Canada">
-          <custom-marker position="Brampton, Canada">
-            <div><b>Hi, USA</b>
-              <img src="http://icons.iconarchive.com/icons/custom-icon-design/2014-world-cup-flags/32/USA-icon.png" />
-            </div>
-          </custom-marker>
-          <marker position="Brampton, Canada"></marker>
-        </ngui-map>
+        
+      
+        
+         
     </div>
     <div class="col-md-4">
 
@@ -113,7 +144,7 @@
           </div>
         </div>
           <div class="form-group text-center">
-              <button type="submit" class=" btn btn-success"  >Cadastrar</button>
+              <button type="submit" (click)="atualizar()" class=" btn btn-success"  >Atualizar</button>
           </div>
           
         </form>
