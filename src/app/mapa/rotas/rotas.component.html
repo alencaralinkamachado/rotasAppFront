@@ -1,64 +1,57 @@
  
+  
   <div class="row">
-    <div class="col-md-8">
+     <!-- <div *ngIf="!ativarAutalizacaoCliente" class="col-md-12"> -->
+        <div class="col-md-8">
 
-        <div *ngIf="cetarCoordenadas">
-            <h1>Map With StreetView  {{ marker.lat }}</h1>
-            <ngui-map 
-              center="{{ marker. lat }}, {{ marker.lng }}"
-              zoom="18"
-              map-type-id="MapTypeId.SATELLITE"
-              tilt="45" 
-              >
+     
+
+        <ngui-map style="height:90vh; width:100%;" zoom="14"  center="-30.3486032, -54.3453789" > 
            
-                  <street-view-panorama 
-                  position="{{ marker. lat }}, {{ marker.lng }}"
-                  pov="{heading: 165, pitch: 0}"
-                  id="te"
-                  zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
-        
-              
-               
-             </street-view-panorama>
-            </ngui-map>
-              
-
-           <!-- 
-             <div id="sv"></div>  
-             streetView="StreetViewPanorama( document.querySelector('div#sv'), {position:new google.maps.LatLng({{ marker. lat }}, {{ marker.lng }})})"
-.addListener('position_changed', function() { moveuPonto($event);})
-
-             <street-view-panorama
-               position="{{ marker. lat }}, {{ marker.lng }}"
-               pov="{heading: 165, pitch: 0}"
-               zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
-                
-              </street-view-panorama>
-            -->
-
-          </div>
-
-        <ngui-map style="height:100vh; width:100%;" zoom="14"  center="-30.3486032, -54.3453789" > 
-        
           <marker *ngFor="let cli of clientes" (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
               <info-window id="iw">
                   <div *ngIf="marker.display">
-                    lat: {{ marker.lat }}, lng: {{ marker.lng }} - {{cli.nome}}
+                    lat: {{ marker.lat }}, lng: {{ marker.lng }} 
+                    <br /><strong>{{marker.title}}</strong> 
                   </div>
-                  <button (click)="hideMarkerInfo()">Hide Info</button>
+                  <!-- <button (click)="hideMarkerInfo()">Hide Info</button> -->
                 </info-window>
           </marker>
          <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
           <marker [position]="[-30.342013, -54.339090]" ></marker>
-          <marker [position]="[-30.331457, -54.317887]" ></marker> -->
+          <marker [position]="[-30.331457, -54.317887]" ></marker> 
+        drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+        -->
           
+          <drawing-manager
+         
+          [drawingControl]="true"
+          [drawingControlOptions]="{
+            position: 6,
+            drawingModes: ['polygon']
+           }"
+          [circleOptions]="{
+            fillColor: '#ffff00',
+            fillOpacity: 1,
+            strokeWeight: 5,
+            editable: true,
+            zIndex: 1
+          }"></drawing-manager>
+
         </ngui-map>
-        
-      
+       
         
          
     </div>
-    <div class="col-md-4">
+    <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
+        selectedOverlay: {{selectedOverlay}} <br/>
+        <button (click)="deleteSelectedOverlay()">Limpar Rota</button>
+      
+      <h3>Criar Rota para o Clientes:</h3>
+      <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5>
+    </div>
+
+    <div *ngIf="ativarAutalizacaoCliente" class="col-md-4">
 
 
         <h3>Dados Clientes</h3>
@@ -126,9 +119,10 @@
             </div>
           </div>
           <legend>
-            <strong>  Coordenadas </strong>
+            <strong>  Coordenadas </strong> 
           </legend>
           <div class="row">
+            
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="latitude">Latitude:</label>
@@ -140,6 +134,12 @@
                     <label for="latitude">Longitude:</label>
                     <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" >
                 </div>          
+            </div>
+          </div>
+          
+          <div class="row" >
+            <div class="form-group">
+              <input (click)="ativaStreetViewMap()" type="checkbox" > Ativar StreetViewPanorama? <br>
             </div>
           </div>
         </div>
@@ -163,6 +163,44 @@
       [position]="pos"
       (initialized$)="onMarkerInit($event)"></marker>
 </ngui-map> -->
- 
+<div class="row">
+    
+          <div *ngIf="ativaStreetView">
+              <h3>Casa do Cliente  {{ clienteSelecionado.nome }}</h3>
+              <ngui-map 
+                center="{{ marker. lat }}, {{ marker.lng }}"
+                zoom="18"
+                map-type-id="MapTypeId.SATELLITE"
+                tilt="45" 
+                >
+             
+                    <street-view-panorama 
+                    position="{{ marker. lat }}, {{ marker.lng }}"
+                    pov="{heading: 100, pitch: 0}"
+                    id="te"
+                    zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
+          
+                
+                 
+               </street-view-panorama>
+              </ngui-map>
+                
+    
+             <!-- 
+               <div id="sv"></div>  
+               streetView="StreetViewPanorama( document.querySelector('div#sv'), {position:new google.maps.LatLng({{ marker. lat }}, {{ marker.lng }})})"
+    .addListener('position_changed', function() { moveuPonto($event);})
+    
+               <street-view-panorama
+                 position="{{ marker. lat }}, {{ marker.lng }}"
+                 pov="{heading: 165, pitch: 0}"
+                 zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
+                  
+                </street-view-panorama>
+              -->
+    
+            </div>
+    
+      </div>
  
 

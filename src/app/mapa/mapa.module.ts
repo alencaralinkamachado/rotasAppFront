@@ -12,7 +12,7 @@ import { MapaRoutingModule } from './mapa-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyA1lgTn2BQ2ZDHgvVKeDN174dousm8btkI'}),
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyA1lgTn2BQ2ZDHgvVKeDN174dousm8btkI&libraries=visualization,places,drawing'}),
     MapaRoutingModule,
     FormsModule
   ],
@@ -22,3 +22,5 @@ import { MapaRoutingModule } from './mapa-routing.module';
   ]
 })
 export class MapaModule { }
+//https://maps.google.com/maps/api/js?libraries=visualization,places,drawing
+//
