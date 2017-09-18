@@ -12,6 +12,7 @@ export class ClienteService {
   private readonly BASE_URL = "http://localhost:8080/appRotas-1.0";
   private readonly RUA_URL = this.BASE_URL + '/rua/ruas/cidade/1';
   private readonly CLIENTE_URL = this.BASE_URL + '/cliente';
+  
   private headers : Headers;
 
   constructor(private http: Http) { 
@@ -34,6 +35,12 @@ export class ClienteService {
    return this.http.get(this.CLIENTE_URL+'/clientes')
    .map(response => response.json() as Cliente)
    .catch(error => Observable.throw(error));
+ }
+
+ atualiza_lat_lng(cliente: Cliente) : Observable<String>{
+   return this.http.post(this.CLIENTE_URL+'/atualizalatlng', JSON.stringify(cliente), {headers : this.headers})
+   .map( () => ("Coordenadas Atualizada com sucesso"))
+   .catch(error => ("e"));
  }
 
 }
