@@ -9,7 +9,9 @@ import { Rua, Cliente } from '../shared';
 @Injectable()
 export class ClienteService {
 
-  private readonly BASE_URL = "http://localhost:8080/appRotas-1.0";
+  private readonly ip_producao = "http://200.132.36.170:8087/";
+  private readonly ip_teste = "http://localhost:8080/";
+  private readonly BASE_URL = this.ip_teste+"appRotas-1.0";
   private readonly RUA_URL = this.BASE_URL + '/rua/ruas/cidade/1';
   private readonly CLIENTE_URL = this.BASE_URL + '/cliente';
   

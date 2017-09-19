@@ -49,15 +49,7 @@
     <legend>
      <strong> Endereço </strong>
     </legend>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="cidade">Cidade:</label>
-                <input type="text" class="form-control" name="cidade" id="cidade" value="São Gabriel" 
-                [(ngModel)]="cliente.cidade.nome" disabled>
-              </div>
-        </div>
-    </div>
+    
     <div class="row">
       <div class="col-md-9">
           <div class="form-group">
@@ -78,6 +70,22 @@
           </div>
       </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="complemento">Complemento:</label>
+                <input type="text" class="form-control" name="complemento" id="complemento" maxlength="39"
+                [(ngModel)]="cliente.complemento">
+              </div>
+        </div>
+      <div class="col-md-8">
+          <div class="form-group">
+              <label for="cidade">Cidade:</label>
+              <input type="text" class="form-control" name="cidade" id="cidade" value="São Gabriel" 
+              [(ngModel)]="cliente.cidade.nome" disabled>
+            </div>
+      </div>
+  </div>
     <legend>
       <strong>  Coordenadas </strong>
     </legend>

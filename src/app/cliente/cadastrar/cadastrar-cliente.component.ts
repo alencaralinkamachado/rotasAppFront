@@ -16,9 +16,9 @@ export class CadastrarClienteComponent implements OnInit {
 
   @ViewChild('formCliente') formCliente: NgForm;
 
-  private ruas : Rua[] = []; 
-  private rua : Rua;
-  private cliente : Cliente;
+  public ruas : Rua[] = []; 
+  public rua : Rua;
+  public cliente : Cliente;
 
   constructor(private clienteService : ClienteService) { }
 

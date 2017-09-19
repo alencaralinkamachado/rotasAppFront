@@ -146,7 +146,7 @@
 
         <div class="col-md-{{larguraMapa}}">
 
-        <ngui-map style="height:90vh; width:100%;" zoom="14"  center="-30.33778316185373, -54.326743862426724" > 
+        <ngui-map style="height:90vh; width:100%;" zoom="14"  center="-30.33778316185373, -54.326743862426724"  > 
            
           <marker *ngFor="let cli of clientes" (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
               <info-window id="iw">

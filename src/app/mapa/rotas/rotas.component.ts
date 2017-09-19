@@ -17,14 +17,14 @@ export class RotasComponent implements OnInit {
   private  clientesSelec : Cliente [] = [] ;
   
   //visibilidade da view
-  private ativaStreetView = false;
-  private ativarAutalizacaoCliente = false;
-  private ativarCriacaoRotaClientes = false;
-  private larguraMapa : string = '12';
+  public ativaStreetView = false;
+  public ativarAutalizacaoCliente = false;
+  public ativarCriacaoRotaClientes = false;
+  public larguraMapa : string = '12';
   
 
-  private clientes : Cliente [] = [] ;
-  private clienteSelecionado : Cliente;
+  public clientes : Cliente [] = [] ;
+  public clienteSelecionado : Cliente;
 
   // esse Overlay e um polygon
   private selectedOverlay: any;
@@ -173,7 +173,7 @@ export class RotasComponent implements OnInit {
     this.markerInstanciaSelecionadoMapa = marker;
     this.marker.lat = marker.getPosition().lat();
     this.marker.lng = marker.getPosition().lng();
-    this.marker.title = 'Nome: '+cli.nome+' Cod Rua: '+cli.rua.id+' Nº '+cli.numero;
+    this.marker.title = 'Nome: '+cli.nome+' - '+cli.rua.nome+' Nº '+cli.numero;
     
     this.clienteSelecionado = cli;
     console.log('---> '+this.clienteSelecionado.nome);
