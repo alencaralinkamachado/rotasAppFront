@@ -94,7 +94,11 @@ export class RotasComponent implements OnInit {
       }
     }
 
-    console.log('**** clientes selecionados ****');
+   
+    this.achaClientesVindosBackend_e_que_nao_marcados_mapa();
+
+    console.log('********************************');
+    console.log('**** clientes selecionados ****'+this.clientesSelec.length);
     for(let cli of this.clientesSelec){
       console.log('Nome: '+cli.nome+' checked? '+cli.checked);
     }
@@ -103,6 +107,32 @@ export class RotasComponent implements OnInit {
     this.ativarCriacaoRotaClientes = true;
     
   }
+ 
+
+/**
+ laço de repedicao usado para idt clientes q nao foram 
+ marcados no mapa mas vieram do backend
+ */
+  
+achaClientesVindosBackend_e_que_nao_marcados_mapa():void{
+
+  for(let cliT of this.clientes){
+    let cod = false;
+      for(let cli of this.clientesSelec){
+        if(cliT.nome == cli.nome){
+          cod = true;
+        }
+      }
+      if(!cod){
+        console.log('&&&&');
+        console.log('&&&& clientes q não apareceram no mapa'+cliT.nome);
+      }
+      
+  }
+}
+
+ 
+
 
   /**
    * ativa mapa streetView

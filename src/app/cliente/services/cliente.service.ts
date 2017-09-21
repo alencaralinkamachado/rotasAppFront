@@ -11,7 +11,7 @@ export class ClienteService {
 
   private readonly ip_producao = "http://200.132.36.170:8087/";
   private readonly ip_teste = "http://localhost:8080/";
-  private readonly BASE_URL = this.ip_teste+"appRotas-1.0";
+  private readonly BASE_URL = this.ip_producao+"appRotas-1.0";
   private readonly RUA_URL = this.BASE_URL + '/rua/ruas/cidade/1';
   private readonly CLIENTE_URL = this.BASE_URL + '/cliente';
   
@@ -30,7 +30,8 @@ export class ClienteService {
 
  cadastra(cliente : Cliente) : Observable<String>{
    return this.http.post(this.CLIENTE_URL, JSON.stringify(cliente),{headers : this.headers})
-   .map( ()=> ("Cliente cadastrado com sucesso") );
+   .map( ()=> ("Cliente cadastrado com sucesso") )
+   .catch(error => ("e"));
  }
 
  listaClientes() : Observable<Cliente[]>{

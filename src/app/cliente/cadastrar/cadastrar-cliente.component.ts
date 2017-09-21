@@ -46,13 +46,26 @@ export class CadastrarClienteComponent implements OnInit {
     if(this.formCliente.form.valid){
       console.log(this.cliente);
       this.clienteService.cadastra(this.cliente).subscribe(res =>{
-        swal("Sucesso!", res, "success");
+        if(res === 'e'){
+          swal("ERRO!", "Cliente não cadastrado! Informe o suporte.", "error");
+        }else{
+          swal("Sucesso!", res, "success");
+        }
+        
       });
     }
     this.iniciaCliente();
   }
 
 /*
+
+    if(res === 'e'){
+          swal("ERRO!", "Problemas na atulização das coordenadas", "error");
+        }else{
+          swal('Atualizado!','Coordenadas Atualizada com sucesso','success');
+          this.fecharFromAtualizacao();
+        }
+
   showSwal(type){
     if(type == 'basic'){
       swal("Here's a message!");
