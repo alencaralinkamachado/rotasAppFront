@@ -30,7 +30,8 @@ export class ClienteService {
 
  cadastra(cliente : Cliente) : Observable<String>{
    return this.http.post(this.CLIENTE_URL, JSON.stringify(cliente),{headers : this.headers})
-   .map( ()=> ("Cliente cadastrado com sucesso") );
+   .map( ()=> ("Cliente cadastrado com sucesso") )
+   .catch(error => ("e"));
  }
 
  listaClientes() : Observable<Cliente[]>{
