@@ -6,7 +6,17 @@
             selectedOverlay: {{selectedOverlay}} <br/>
             <button (click)="deleteSelectedOverlay()">Limpar Rota</button>
             <button (click)="checkboxsSelecionados()">Selecionados</button>
-          <h3>Criar Rota para o Clientes: {{clientesSelec.length}}</h3>
+            <h4>Clientes Selecionados: {{clientesSelec.length}}</h4>
+
+          <div class="form-group">
+            <label for="rota">Rota:</label>           
+            <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
+              <option *ngFor="let r of rotas" [value]="r.id"> 
+               {{r.id}} - {{r.nome}}
+              </option>
+            </select>
+
+          </div>
          <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
           <table class="table table-hover table-striped">
             <thead>
@@ -148,7 +158,14 @@
 
         <ngui-map style="height:90vh; width:100%;" zoom="14"  center="-30.33778316185373, -54.326743862426724"  > 
            
-          <marker *ngFor="let cli of clientes" (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
+          <marker *ngFor="let cli of clientes" 
+          (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)"
+          [icon]="{
+            url: '../../assets/img/markerAzure.png',
+            anchor: [16,16],
+            size: [32,32],
+            scaledSize: [32,32]
+          }">
               <info-window id="iw">
                   <div *ngIf="marker.display">
                     lat: {{ marker.lat }}, lng: {{ marker.lng }} 
@@ -157,10 +174,25 @@
                   <!-- <button (click)="hideMarkerInfo()">Hide Info</button> -->
                 </info-window>
           </marker>
+          <marker position="-30.334531, -54.328712"
+          [icon]="{
+            url: '../../assets/img/markerVerde.png',
+            anchor: [16,16],
+            size: [52,52],
+            scaledSize: [52,52]
+          }">
+         </marker>
          <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
           <marker [position]="[-30.342013, -54.339090]" ></marker>
           <marker [position]="[-30.331457, -54.317887]" ></marker> 
         drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+
+        [icon]="{
+            url: 'https://plnkr.co/img/plunker.png',
+            anchor: [16,16],
+            size: [32,32],
+            scaledSize: [32,32]
+          }"
         -->
           
           <drawing-manager

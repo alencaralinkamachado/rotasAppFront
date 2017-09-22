@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ClienteService } from '../../cliente';
-import { Rua, Cliente, Cidade } from '../../cliente/shared';
 import { DrawingManager, NguiMap, NguiMapComponent } from '@ngui/map';
+
+import { ClienteService } from '../../cliente';
+import { Rua, Cliente, Cidade, Rota } from '../../model';
+import { RotaService } from '../services';
+
 
 declare var swal:any;
 
@@ -24,6 +27,8 @@ export class RotasComponent implements OnInit {
   
 
   public clientes : Cliente [] = [] ;
+  public rotas : Rota [] = [];
+  public rotaSelecionada : Rota = new Rota();
   public clienteSelecionado : Cliente;
 
   // esse Overlay e um polygon
@@ -35,7 +40,7 @@ export class RotasComponent implements OnInit {
   //marker clicado/selecionado pelo usuario
   private markerInstanciaSelecionadoMapa : any;
 
-  constructor(private clienteService : ClienteService) { }
+  constructor(private clienteService : ClienteService, private rotaService : RotaService) { }
   
 
   ngOnInit() {
@@ -56,8 +61,17 @@ export class RotasComponent implements OnInit {
       });
     });
     this.carregaClientes();
+    this.carregaRotas();
   }
  
+  carregaRotas() : void{
+    this.rotaService.listarRotasPorCidade().subscribe( rotas => {
+      this.rotas = rotas;
+      console.log(rotas);
+    });
+  }
+
+
   private  clienteTemp : Cliente [] = [] ;
   /**
    * Carrega todos os clientes do backend
@@ -95,7 +109,7 @@ export class RotasComponent implements OnInit {
     }
 
    
-    this.achaClientesVindosBackend_e_que_nao_marcados_mapa();
+    //this.achaClientesVindosBackend_e_que_nao_marcados_mapa();
 
     console.log('********************************');
     console.log('**** clientes selecionados ****'+this.clientesSelec.length);
@@ -108,7 +122,6 @@ export class RotasComponent implements OnInit {
     
   }
  
-
 /**
  laço de repedicao usado para idt clientes q nao foram 
  marcados no mapa mas vieram do backend
@@ -148,6 +161,8 @@ achaClientesVindosBackend_e_que_nao_marcados_mapa():void{
    * aumenta a largura do mapa para 12 colunas
    */
   deleteSelectedOverlay() {
+
+    
     if (this.selectedOverlay) {
       this.selectedOverlay.setMap(null);
       delete this.selectedOverlay;
@@ -298,7 +313,8 @@ achaClientesVindosBackend_e_que_nao_marcados_mapa():void{
 }
    
   checkboxsSelecionados() : void{
-   
+    console.log('Rota selecionada : '+this.rotaSelecionada.id);
+    //this.rotaSelecionada = new Rota();
     console.log('clinetes');
     for(let c of this.selectedCli()){
       console.log(c);

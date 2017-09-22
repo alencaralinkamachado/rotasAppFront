@@ -4,6 +4,7 @@ import { NguiMapModule } from '@ngui/map';
 import { FormsModule } from '@angular/forms';
 
 import { RotasComponent } from './rotas/rotas.component';
+import { RotaService } from './services';
 
 import { MapaRoutingComponent } from './mapa-routing.component';
 import { MapaRoutingModule } from './mapa-routing.module';
@@ -19,8 +20,9 @@ import { MapaRoutingModule } from './mapa-routing.module';
   declarations: [
     RotasComponent,
     MapaRoutingComponent
+  ],
+  providers :[
+    RotaService
   ]
 })
 export class MapaModule { }
-//https://maps.google.com/maps/api/js?libraries=visualization,places,drawing
-//
