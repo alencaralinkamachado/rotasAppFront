@@ -2,25 +2,21 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Rua, Cliente } from '../shared';
+import { Rua, Cliente } from '../../model';
 
-
+import { AbstractService } from '../../abstract.service';
 
 @Injectable()
-export class ClienteService {
+export class ClienteService extends AbstractService{
 
-  private readonly ip_producao = "http://200.132.36.170:8087/";
-  private readonly ip_teste = "http://localhost:8080/";
-  private readonly BASE_URL = this.ip_producao+"appRotas-1.0";
+  
   private readonly RUA_URL = this.BASE_URL + '/rua/ruas/cidade/1';
   private readonly CLIENTE_URL = this.BASE_URL + '/cliente';
   
-  private headers : Headers;
-
-  constructor(private http: Http) { 
-    this.headers = new Headers();
-    this.headers.append('Content-Type','application/json');
+  constructor(http: Http) {
+    super(http);
   }
+
 
   listarRuas() : Observable<Rua[]>{
     return this.http.get(this.RUA_URL)

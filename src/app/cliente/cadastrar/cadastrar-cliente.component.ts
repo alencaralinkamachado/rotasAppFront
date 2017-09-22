@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClienteService } from '../services';
-import { Rua, Cliente, Cidade } from '../shared';
+import { Rua, Cliente, Cidade } from '../../model';
 
 import { NgForm } from '@angular/forms';
 
