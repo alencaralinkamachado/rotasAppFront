@@ -20,4 +20,19 @@ export class RotaService extends AbstractService  {
     .catch(error => Observable.throw(error));
   }
 
+  incluiClientesRota(rota : Rota) : Observable<String>{
+    return this.http.post(this.ROTA_URL+'/rota/clientes', JSON.stringify(rota), {headers : this.headers})
+    .map( () => ("Clientes Incluidos na rota: "+rota.nome))
+    .catch(error => ("e"));
+  }
+
 }
+
+
+/*
+cadastra(cliente : Cliente) : Observable<String>{
+   return this.http.post(this.CLIENTE_URL, JSON.stringify(cliente),{headers : this.headers})
+   .map( ()=> ("Cliente cadastrado com sucesso") )
+   .catch(error => ("e"));
+ }
+*/

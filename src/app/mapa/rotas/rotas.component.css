@@ -1,1 +1,6 @@
 #sv {width: 50%; height: 300px} /*ngui-map {width: 50%; float: left}*/
+.resize {
+    width:10px;
+    height:10px;
+}
+

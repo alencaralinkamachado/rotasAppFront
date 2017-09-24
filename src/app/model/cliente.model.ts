@@ -1,5 +1,4 @@
-import { Rua } from './rua.model';
-import { Cidade } from './cidade.model';
+import { Rua, Cidade, Rota } from './index';
 
 export class Cliente{
 
@@ -7,7 +6,7 @@ export class Cliente{
     public ondeDeixar?: string, public rua?: Rua, public numero?: number, public cidade?: Cidade, 
     public latitude?: string, public longitude?: string, public latv?: number, public lngv?: number, 
     public complemento?: string, public email?: string, public telefone1?: string, public telefone2?: string, public telefone3?: string, 
-    ){  }
+    public rota?: Rota){  }
 
 
     public checked : boolean;

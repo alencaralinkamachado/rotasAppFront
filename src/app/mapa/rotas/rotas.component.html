@@ -1,88 +1,84 @@
- 
-  
-  <div class="row">
+<div class="row">
 
-      <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
-            selectedOverlay: {{selectedOverlay}} <br/>
-            <button (click)="deleteSelectedOverlay()">Limpar Rota</button>
-            <button (click)="checkboxsSelecionados()">Selecionados</button>
-            <h4>Clientes Selecionados: {{clientesSelec.length}}</h4>
+  <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
+    selectedOverlay: {{selectedOverlay}} <br/>
+    <button (click)="deleteSelectedOverlay()">Limpar Rota</button>
+    <button (click)="checkboxsSelecionados()">Selecionados</button>
+    <h4>Clientes Selecionados: {{clientesSelec.length}}</h4>
 
-          <div class="form-group">
-            <label for="rota">Rota:</label>           
-            <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
+    <div class="form-group">
+      <label for="rota">Rota:</label>
+      <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
               <option *ngFor="let r of rotas" [value]="r.id"> 
                {{r.id}} - {{r.nome}}
               </option>
             </select>
 
-          </div>
-         <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                  <th>Nome/Endereço</th>                                    
-                  <th>OK<th>
-              </tr>
-            </thead>                            
-                <tbody>
-                  <tr *ngFor="let cli of clientesSelec">
-                    <td>
-                      <strong>{{cli.nome}}</strong>
-                      <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
-                    </td>                    
-                    <td>
-                      <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>  
-                    </td>
-                  </tr>
-                </tbody>
-            
-          </table>
-          
-          
-          
-      </div>
+    </div>
+    <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Nome/Endereço</th>
+          <th>OK
+            <th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cli of clientesSelec">
+          <td>
+            <strong>{{cli.nome}}</strong>
+            <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
+          </td>
+          <td>
+            <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
+          </td>
+        </tr>
+      </tbody>
 
-      <div *ngIf="ativarAutalizacaoCliente" class="col-md-4">
-    
-                <h3>Dados Clientes</h3>           
-                
-                <form >
-                 <div class="well">
-                  <div class="row"> 
-              
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome"  placeholder="nome cliente"
-                        [(ngModel)]="clienteSelecionado.nome">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                          <label for="cpf">CPF:</label>
-                          <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled
-                          >
-                        </div>
-                      </div>
-                   <!-- <div class="col-md-3">
+    </table>
+
+
+
+  </div>
+
+  <div *ngIf="ativarAutalizacaoCliente" class="col-md-4">
+
+    <h3>Dados Clientes</h3>
+
+    <form>
+      <div class="well">
+        <div class="row">
+
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="nome">Nome:</label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="cpf">CPF:</label>
+              <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+            </div>
+          </div>
+          <!-- <div class="col-md-3">
                       <div class="form-group">
                         <label for="codCorreio">Cód Correio:</label>
                         <input type="number" class="form-control"  name="codCorreio" id="codCorreio" placeholder="código do correio" 
                         [(ngModel)]="clienteSelecionado.codCorreio">
                       </div>
                     </div> -->
-                  </div>
-              
-                  <div class="row">
-                    <div class="form-group col-md-12">
-                      <label for="ondeDeixar">Onde deixar:</label>
-                      <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?"
-                      [(ngModel)]="clienteSelecionado.ondeDeixar">
-                    </div>
-                  </div>
-                  
-                <!--  <legend>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="ondeDeixar">Onde deixar:</label>
+            <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?" [(ngModel)]="clienteSelecionado.ondeDeixar">
+          </div>
+        </div>
+
+        <!--  <legend>
                    <strong> Endereço </strong>
                   </legend>
                   <div class="row">
@@ -114,78 +110,140 @@
                         </div>
                     </div>
                   </div> -->
-                  <legend>
-                    <strong>  Coordenadas </strong> 
-                  </legend>
-                  <div class="row">
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="latitude">Latitude:</label>
-                            <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" 
-                            [(ngModel)]="clienteSelecionado.latv">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="latitude">Longitude:</label>
-                            <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" 
-                            [(ngModel)]="clienteSelecionado.lngv">
-                        </div>          
-                    </div>
-                  </div>
-                  
-                  <div class="row" >
-                    <div class="form-group">
-                      <input (click)="ativaStreetViewMap()" type="checkbox" > Ativar StreetViewPanorama? <br>
-                    </div>
-                  </div>
-                </div>
-                  <div class="form-group text-center">
-                      <button type="submit" (click)="fecharFromAtualizacao()" class=" btn btn-primary"  >CANCELAR</button>  
-                    <button type="submit" (click)="atualizar()" class=" btn btn-success"  >Atualizar</button>
-                      
-                  </div>
-                  
-                </form>
-        
-            </div> <!-- fim div formulario cliente -->
+        <legend>
+          <strong>  Coordenadas </strong>
+        </legend>
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="latitude">Latitude:</label>
+              <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" [(ngModel)]="clienteSelecionado.latv">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="latitude">Longitude:</label>
+              <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" [(ngModel)]="clienteSelecionado.lngv">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <input (click)="ativaStreetViewMap()" type="checkbox"> Ativar StreetViewPanorama? <br>
+          </div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" (click)="fecharFromAtualizacao()" class=" btn btn-primary">CANCELAR</button>
+        <button type="submit" (click)="atualizar()" class=" btn btn-success">Atualizar</button>
+
+      </div>
+
+    </form>
+
+  </div>
+  <!-- fim div formulario cliente -->
 
 
+  <!-- 
 
-
-        <div class="col-md-{{larguraMapa}}">
-
-        <ngui-map style="height:90vh; width:100%;" zoom="14"  center="-30.33778316185373, -54.326743862426724"  > 
-           
-          <marker *ngFor="let cli of clientes" 
+              <marker *ngFor="let cli of clientes" 
           (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)"
-          [icon]="{
-            url: '../../assets/img/markerAzure.png',
-            anchor: [16,16],
-            size: [32,32],
-            scaledSize: [32,32]
-          }">
+          [icon]={{imgMarker}}>
+            
               <info-window id="iw">
                   <div *ngIf="marker.display">
                     lat: {{ marker.lat }}, lng: {{ marker.lng }} 
                     <br /><strong>{{marker.title}}</strong> 
                   </div>
-                  <!-- <button (click)="hideMarkerInfo()">Hide Info</button> -->
+                  
                 </info-window>
-          </marker>
-          <marker position="-30.334531, -54.328712"
-          [icon]="{
-            url: '../../assets/img/markerVerde.png',
+              </marker>
+ .......
+
+ <custom-marker *ngFor="let cli of clientes"  
+              (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
+            <div>
+              <b>Hi, USA</b> 
+              <img class="resize" src="../../assets/img/{{cli.rota.img}}.png" />
+            </div>
+          </custom-marker>
+           (mapReady$)="onMapReady($event)"
+             -->
+
+  <div class="col-md-{{larguraMapa}}">
+
+    <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.33778316185373, -54.326743862426724">
+
+      <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="permiterMoverPonto($event)"
+        (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
+
+
+        <info-window id="iw">
+       <!--   <div *ngIf="marker.display">
+            lat: {{ marker.lat }}, lng: {{ marker.lng }}
+            <br /><strong>{{marker.title}}</strong> 
+          </div> -->
+
+          <div *ngIf="marker.display" id="content">
+              <div id="siteNotice"></div>
+              <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
+              <div id="bodyContent">
+                <p>
+                  <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left"/>
+                  O cliente <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br /> colocar aqui mais
+                  informações importântes Uluru is listed as a World Heritage Site.</p> 
+                <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
+                          https://en.wikipedia.org/w/index.php?title=Uluru</a>   (last visited June 22, 2009).</p> 
+              </div>
+            </div>
+
+        </info-window>
+      </marker>
+
+
+      
+
+      <!-- <custom-marker *ngFor="let cli of clientes" (click)="clicked($event)"
+      (initialized$)="onCustomMarkerInit($event)">
+        <div>
+          <b>Hi, USA</b>
+          <img class="resize" src="../../assets/img/{{cli.rota.img}}.png" />
+        </div>
+      </custom-marker> -->
+
+      <!--    <custom-marker *ngFor="let cli of clientes"  [position]="[cli.latitude, cli.longitude]" (click)="clicked1($event)" (initialized$)="onCustomMarkerInit($event)">
+        <div>
+          <b>Hi, USA</b>
+          <img src="http://icons.iconarchive.com/icons/custom-icon-design/2014-world-cup-flags/32/USA-icon.png" />
+        </div>
+        <info-window id="iw">
+            lat: {{pos.lat}}, lng: {{ pos.lng }}
+          </info-window>
+      </custom-marker> -->
+      <!--- interpolation within info-window is from this component scope -->
+
+
+      <marker position="-30.334531, -54.328712" [icon]="{
+            url: '../../assets/img/markerSolidBack.png',
             anchor: [16,16],
             size: [52,52],
-            scaledSize: [52,52]
+            scaledSize: [72,72]
           }">
-         </marker>
-         <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
+      </marker>
+      <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
           <marker [position]="[-30.342013, -54.339090]" ></marker>
           <marker [position]="[-30.331457, -54.317887]" ></marker> 
         drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+
+[icon]="{
+            url: `{{imgMarker}}`,
+            anchor: [16,16],
+            size: [32,32],
+            scaledSize: [32,32]
+          }">
 
         [icon]="{
             url: 'https://plnkr.co/img/plunker.png',
@@ -194,15 +252,11 @@
             scaledSize: [32,32]
           }"
         -->
-          
-          <drawing-manager
-         
-          [drawingControl]="true"
-          [drawingControlOptions]="{
+
+      <drawing-manager [drawingControl]="true" [drawingControlOptions]="{
             position: 6,
             drawingModes: ['polygon']
-           }"
-          [circleOptions]="{
+           }" [circleOptions]="{
             fillColor: '#ffff00',
             fillOpacity: 1,
             strokeWeight: 5,
@@ -210,17 +264,17 @@
             zIndex: 1
           }"></drawing-manager>
 
-        </ngui-map>
-       
-        
-         
-    </div>
-   
+    </ngui-map>
 
-    
-  </div> 
 
- <!-- <ngui-map 
+
+  </div>
+
+
+
+</div>
+
+<!-- <ngui-map 
   zoom="13" 
   center="37.775, -122.434" 
   (mapReady$)="onMapReady($event)"
@@ -232,29 +286,21 @@
       (initialized$)="onMarkerInit($event)"></marker>
 </ngui-map> -->
 <div class="row">
-    
-          <div *ngIf="ativaStreetView">
-              <h3>Casa do Cliente  {{ clienteSelecionado.nome }}</h3>
-              <ngui-map 
-                center="{{ marker. lat }}, {{ marker.lng }}"
-                zoom="18"
-                map-type-id="MapTypeId.SATELLITE"
-                tilt="45" 
-                >
-             
-                    <street-view-panorama 
-                    position="{{ marker. lat }}, {{ marker.lng }}"
-                    pov="{heading: 100, pitch: 0}"
-                    id="te"
-                    zoom="1" (position_changed)="moveuPonto($event)" (maptypeid_changed)="posicao($event)"  >
-          
-                
-                 
-               </street-view-panorama>
-              </ngui-map>
-                
-    
-             <!-- 
+
+  <div *ngIf="ativaStreetView">
+    <h3>Casa do Cliente {{ clienteSelecionado.nome }}</h3>
+    <ngui-map center="{{ marker. lat }}, {{ marker.lng }}" zoom="18" map-type-id="MapTypeId.SATELLITE" tilt="45">
+
+      <street-view-panorama position="{{ marker. lat }}, {{ marker.lng }}" pov="{heading: 100, pitch: 0}" id="te" zoom="1" (position_changed)="moveuPonto($event)"
+        (maptypeid_changed)="posicao($event)">
+
+
+
+      </street-view-panorama>
+    </ngui-map>
+
+
+    <!-- 
                <div id="sv"></div>  
                streetView="StreetViewPanorama( document.querySelector('div#sv'), {position:new google.maps.LatLng({{ marker. lat }}, {{ marker.lng }})})"
     .addListener('position_changed', function() { moveuPonto($event);})
@@ -266,9 +312,7 @@
                   
                 </street-view-panorama>
               -->
-    
-            </div>
-    
-      </div>
- 
 
+  </div>
+
+</div>
