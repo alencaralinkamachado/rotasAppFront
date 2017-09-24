@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Rua, Cliente } from '../../model';
+import { Rua, Cliente, Rota } from '../../model';
 
 import { AbstractService } from '../../abstract.service';
 
@@ -40,6 +40,12 @@ export class ClienteService extends AbstractService{
    return this.http.post(this.CLIENTE_URL+'/atualizalatlng', JSON.stringify(cliente), {headers : this.headers})
    .map( () => ("Coordenadas Atualizada com sucesso"))
    .catch(error => ("e"));
+ }
+
+ listarClientesPorRota(rota : Rota) : Observable<Cliente[]>{
+   return this.http.get(this.CLIENTE_URL+'/clientes/rota/'+rota.id)
+   .map(response => response.json() as Cliente)
+   .catch(error => Observable.throw(error));
  }
 
 }

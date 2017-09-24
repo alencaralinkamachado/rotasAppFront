@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RotasComponent } from './rotas/rotas.component';
-import { MapaRoutingComponent } from './mapa-routing.component';
+import { MapaRoutingComponent,  } from './mapa-routing.component';
+import { ListarRotaComponent } from './listar';
+import { RotasComponent } from './rotas';
 
 export const MapaRouter : Routes = [
     {
@@ -10,13 +11,15 @@ export const MapaRouter : Routes = [
         component : MapaRoutingComponent,
         children : [
             {
-                path : '',
-                component : RotasComponent
+                path : '', component : RotasComponent
+            },
+            {
+                path : 'listarrotas', component : ListarRotaComponent
             }
         ]
 
     }
-]
+];
 
 @NgModule({
     imports : [

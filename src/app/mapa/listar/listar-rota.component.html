@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="rota">Rota:</label>
+        <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
+                      <option *ngFor="let r of rotas" [value]="r.id"> 
+                       {{r.id}} - {{r.nome}}
+                      </option>
+                    </select>
+        <br />
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="buscaClientesPorRota()">Pesquisar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row" >
+    <div *ngIf="clientes.length > 0">
+      <blockquote class="blockquote">
+        <p class="mb-0">Esta Rota está com <strong>{{clientes.length}}</strong> Clientes</p>
+      </blockquote>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone1</th>
+        <th>Telefone2</th>
+        <th>Obs</th>         
+        <tr *ngFor="let cli of clientes">
+          <td>
+            {{cli.nome}}
+          </td>
+          <td>
+            {{cli.rua.nome}} N° {{cli.numero}} - {{cli.complemento}}
+          </td>
+          <td>
+            {{cli.telefone1}}
+          </td>
+          <td>
+              {{cli.telefone2}}
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+
+    </table>
+  </div>
+
+</div>

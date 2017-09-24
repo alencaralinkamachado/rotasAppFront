@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { ClienteModule } from './cliente';
 import { MapaModule } from './mapa';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { MapaModule } from './mapa';
     BrowserModule,
     ClienteModule,
     MapaModule,
-    AppRoutingModule
+    AppRoutingModule // deixar esse sempre por ultimo
   ],
   providers: [],
   bootstrap: [AppComponent]
