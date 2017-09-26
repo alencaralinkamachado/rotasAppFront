@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes : Routes = [
     {
         path : '',
-        redirectTo : '/cliente',
+        redirectTo : '/listar_cliente',
         pathMatch : 'full'
     }
 ];

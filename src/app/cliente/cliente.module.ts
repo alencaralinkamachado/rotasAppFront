@@ -8,6 +8,8 @@ import { ClienteRoutingComponent } from './cliente-routing.component';
 import { ClienteRoutingModule } from './cliente-routing.module';
 
 import { ClienteService } from './services';
+import { ListarClienteComponent } from './listar';
+import { PesquisarPipe } from './pipes';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ClienteService } from './services';
   ],
   declarations: [
     CadastrarClienteComponent,
-    ClienteRoutingComponent
+    ClienteRoutingComponent,
+    ListarClienteComponent,
+    PesquisarPipe
   ],
   providers : [
     ClienteService

@@ -20,7 +20,7 @@ export class ListarRotaComponent implements OnInit {
   public clientes : Cliente[] = [];
 
 
-  constructor(private router: Router, private rotaService: RotaService, private clienteService : ClienteService) { }
+  constructor(private rotaService: RotaService, private clienteService : ClienteService) { }
 
   ngOnInit() {
     this.rotaService.listarRotasPorCidade().subscribe( rotas =>{
