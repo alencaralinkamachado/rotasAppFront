@@ -2,8 +2,8 @@
 
   <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
     selectedOverlay: {{selectedOverlay}} <br/>
-    <button (click)="deleteSelectedOverlay()">Limpar Rota</button>
-    <button (click)="checkboxsSelecionados()">Selecionados</button>
+    <button (click)="deleteSelectedOverlay()">CANCELAR</button>
+    
     <h4>Clientes Selecionados: {{clientesSelec.length}}</h4>
 
     <div class="form-group">
@@ -16,27 +16,58 @@
 
     </div>
     <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
-    <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th>Nome/Endereço</th>
-          <th>OK
-            <th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cli of clientesSelec">
-          <td>
-            <strong>{{cli.nome}}</strong>
-            <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
-          </td>
-          <td>
-            <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
-          </td>
-        </tr>
-      </tbody>
+    <div *ngIf="ativarTabela_Alterar_ClientesRota">
+        <h5>Atualizar <strong>{{clientesSelecAlterar.length}}</strong> Clientes ?</h5>
+      <button class="btn btn-primary" (click)="alterarClientesRota()">Atualizar</button>
+      <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Nome/Endereço</th>
+              <th>OK
+                <th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cli of clientesSelecAlterar">
+              <td>
+                <strong>{{cli.nome}}</strong>
+                <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.rota.nome}}</p>
+              </td>
+              <td>
+                <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
+              </td>
+            </tr>
+          </tbody>
+    
+        </table>
+    </div>
 
-    </table>
+    <div *ngIf="ativarTabelaIncluirClientesNovosRota">
+        <h5>Incluir <strong>{{clientesSelec.length}}</strong> Clientes ?</h5>  
+      <button class="btn btn-primary" (click)="incluirClientesRota()">Incluir</button>
+        <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Nome/Endereço</th>
+                <th>OK
+                  <th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cli of clientesSelec">
+                <td>
+                  <strong>{{cli.nome}}</strong>
+                  <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
+                </td>
+                <td>
+                  <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
+                </td>
+              </tr>
+            </tbody>
+      
+          </table>
+
+    </div>
 
 
 
@@ -53,7 +84,7 @@
           <div class="col-md-5">
             <div class="form-group">
               <label for="nome">Nome:</label>
-              <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome">
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome" disabled>
             </div>
           </div>
           <div class="col-md-4">
@@ -114,7 +145,14 @@
           <strong>  Coordenadas </strong>
         </legend>
         <div class="row">
-
+          <div class="form-group col-md-12">
+            <label for="rota">Rota:</label>
+            <select name="rota" class="form-control" [(ngModel)]="clienteSelecionado.rota.id" required>
+                                <option *ngFor="let r of rotas" [value]="r.id"> 
+                                 {{r.id}} - {{r.nome}}
+                                </option>
+                   </select>
+          </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="latitude">Latitude:</label>
@@ -130,7 +168,7 @@
         </div>
 
         <div class="row">
-          <div class="form-group">
+          <div class="form-group col-md-12">
             <input (click)="ativaStreetViewMap()" type="checkbox"> Ativar StreetViewPanorama? <br>
           </div>
         </div>
@@ -177,34 +215,34 @@
 
     <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.33778316185373, -54.326743862426724">
 
-      <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="permiterMoverPonto($event)"
+      <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="dbClikPermiterMoverPonto($event)"
         (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
 
 
         <info-window id="iw">
-       <!--   <div *ngIf="marker.display">
+          <!--   <div *ngIf="marker.display">
             lat: {{ marker.lat }}, lng: {{ marker.lng }}
             <br /><strong>{{marker.title}}</strong> 
           </div> -->
 
           <div *ngIf="marker.display" id="content">
-              <div id="siteNotice"></div>
-              <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
-              <div id="bodyContent">
-                <p>
-                  <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left"/>
-                  O cliente <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br /> colocar aqui mais
-                  informações importântes Uluru is listed as a World Heritage Site.</p> 
-                <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
-                          https://en.wikipedia.org/w/index.php?title=Uluru</a>   (last visited June 22, 2009).</p> 
-              </div>
+            <div id="siteNotice"></div>
+            <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
+            <div id="bodyContent">
+              <p>
+                <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left" /> O cliente
+                <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br
+                /> e pertence a rota <strong>{{marker.nomeRota}}</strong> </p>
+              <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
+                          https://en.wikipedia.org/w/index.php?title=Uluru</a> (last visited June 22, 2009).</p>
             </div>
+          </div>
 
         </info-window>
       </marker>
 
 
-      
+
 
       <!-- <custom-marker *ngFor="let cli of clientes" (click)="clicked($event)"
       (initialized$)="onCustomMarkerInit($event)">
@@ -226,8 +264,7 @@
       <!--- interpolation within info-window is from this component scope -->
 
 
-      <marker position="-30.340521, -54.320244" 
-      [icon]="{
+      <marker position="-30.340521, -54.320244" [icon]="{
             url: '../../assets/img/markerSolidBack.png',
             anchor: [16,16],
             size: [52,52],

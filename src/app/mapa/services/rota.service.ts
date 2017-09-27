@@ -26,6 +26,13 @@ export class RotaService extends AbstractService  {
     .catch(error => ("e"));
   }
 
+  alteraClientesRota(rota : Rota) : Observable<String>{
+    return this.http.post(this.ROTA_URL+'/rota/clientes/update', JSON.stringify(rota), {headers : this.headers})
+    .map( () => ("Clientes ALTERADOS na rota: "))
+    .catch(error => ("e"));
+  }
+
+
 }
 
 

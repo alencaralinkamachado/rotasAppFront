@@ -37,7 +37,7 @@ export class ClienteService extends AbstractService{
  }
 
  atualiza_lat_lng(cliente: Cliente) : Observable<String>{
-   return this.http.post(this.CLIENTE_URL+'/atualizalatlng', JSON.stringify(cliente), {headers : this.headers})
+   return this.http.post(this.CLIENTE_URL+'/atualizalatlngrota', JSON.stringify(cliente), {headers : this.headers})
    .map( () => ("Coordenadas Atualizada com sucesso"))
    .catch(error => ("e"));
  }
