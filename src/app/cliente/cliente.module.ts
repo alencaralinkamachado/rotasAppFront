@@ -10,23 +10,27 @@ import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClienteService } from './services';
 import { ListarClienteComponent } from './listar';
 import { PesquisarPipe } from './pipes';
-
+import { KzMaskDirective } from '../shared/directives/masked-input/kz-mask.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     ClienteRoutingModule,
-    HttpModule,
+    HttpModule,    
     FormsModule
   ],
   declarations: [
     CadastrarClienteComponent,
     ClienteRoutingComponent,
     ListarClienteComponent,
-    PesquisarPipe
+    PesquisarPipe,
+    KzMaskDirective    
   ],
   providers : [
     ClienteService
+  ],
+  exports :[
+    KzMaskDirective    
   ]
 })
 export class ClienteModule { }

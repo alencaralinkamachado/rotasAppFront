@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DrawingManager, NguiMap, NguiMapComponent } from '@ngui/map';
+import { Router} from '@angular/router';
+
 
 import { ClienteService } from '../../cliente';
 import { Rua, Cliente, Cidade, Rota } from '../../model';
@@ -42,7 +44,7 @@ export class RotasComponent implements OnInit {
   //marker clicado/selecionado pelo usuario
   private markerInstanciaSelecionadoMapa: any;
 
-  constructor(private clienteService: ClienteService, private rotaService: RotaService) { }
+  constructor(private clienteService: ClienteService, private rotaService: RotaService, private router : Router) { }
 
 
   ngOnInit() {
@@ -336,6 +338,8 @@ export class RotasComponent implements OnInit {
     this.ativarTabela_Alterar_ClientesRota = false;
     this.ativarCriacaoRotaClientes = false;
     this.larguraMapa = '12';
+   // console.log('vai navegar para /mapa ...');
+   // this.router.navigate(['/mapa']);
   }
 
 
@@ -516,6 +520,7 @@ export class RotasComponent implements OnInit {
     this.markerInstanciaSelecionadoMapa.setDraggable(false);
     this.ativarAutalizacaoCliente = false;
     this.larguraMapa = '12';
+   
   }
 
 

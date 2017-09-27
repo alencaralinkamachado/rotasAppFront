@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClienteService } from '../services';
-import { Rua, Cliente, Cidade } from '../../model';
+import { RotaService } from '../../mapa/services';
+import { Rua, Cliente, Cidade, Rota } from '../../model';
 
 import { NgForm } from '@angular/forms';
 
@@ -19,18 +20,28 @@ export class CadastrarClienteComponent implements OnInit {
   public ruas : Rua[] = []; 
   public rua : Rua;
   public cliente : Cliente;
+  public rotas : Rota[] = [];
 
-  constructor(private clienteService : ClienteService) { }
+  constructor(private clienteService : ClienteService, private rotaService : RotaService) { }
 
   ngOnInit() {
 
     this.listarRuas();    
     this.iniciaCliente();
+    this.listarRotas();
+  }
+
+
+  listarRotas() : void {
+      this.rotaService.listarRotasPorCidade().subscribe ( rotas => {
+        this.rotas = rotas;
+      });
   }
 
   iniciaCliente(): void{
     this.cliente = new Cliente();
     this.cliente.rua = new Rua();
+    this.cliente.rota = new Rota();
     this.cliente.cidade = new Cidade(1, "São Gabriel");
   }
 
@@ -42,8 +53,13 @@ export class CadastrarClienteComponent implements OnInit {
   }
 
   cadastrar():void{
-    
-    if(this.formCliente.form.valid){
+    console.log('rota selecionada = '+this.cliente.rota.id);
+    console.log(' cpf '+this.cliente.cpf);
+    console.log(' tel 1'+this.cliente.telefone1)
+    console.log(' tel 2'+this.cliente.telefone2)
+    console.log(' tel 3'+this.cliente.telefone3)
+    console.log(' email'+this.cliente.email.trim());
+   if(this.formCliente.form.valid){
       console.log(this.cliente);
       this.clienteService.cadastra(this.cliente).subscribe(res =>{
         if(res === 'e'){
