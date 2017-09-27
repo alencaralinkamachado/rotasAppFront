@@ -11,6 +11,7 @@ import { ClienteService } from './services';
 import { ListarClienteComponent } from './listar';
 import { PesquisarPipe } from './pipes';
 import { KzMaskDirective } from '../shared/directives/masked-input/kz-mask.directive';
+import { EditarClienteComponent } from './editar';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { KzMaskDirective } from '../shared/directives/masked-input/kz-mask.direc
     ClienteRoutingComponent,
     ListarClienteComponent,
     PesquisarPipe,
-    KzMaskDirective    
+    KzMaskDirective,
+    EditarClienteComponent    
   ],
   providers : [
     ClienteService

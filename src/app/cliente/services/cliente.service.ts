@@ -48,4 +48,10 @@ export class ClienteService extends AbstractService{
    .catch(error => Observable.throw(error));
  }
 
+ buscaPorId(id : number) : Observable<Cliente>{
+   return this.http.get(this.CLIENTE_URL+'/cliente/'+id)
+   .map(response => response.json())
+  .catch(error => Observable.throw(error));
+ }
+
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CadastrarClienteComponent } from './cadastrar';
 import { ListarClienteComponent } from './listar';
+import { EditarClienteComponent } from './editar';
 import { ClienteRoutingComponent } from './cliente-routing.component';
 
 
@@ -19,6 +20,10 @@ export const ClienteRoutes : Routes = [
             {
                 path : 'cadastrar_cliente',
                 component : CadastrarClienteComponent
+            },
+            {
+                path: 'editar_cliente/:id',
+                component : EditarClienteComponent
             }
 
         ]
