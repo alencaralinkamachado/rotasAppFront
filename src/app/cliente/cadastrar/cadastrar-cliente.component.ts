@@ -58,7 +58,7 @@ export class CadastrarClienteComponent implements OnInit {
     console.log(' tel 1'+this.cliente.telefone1)
     console.log(' tel 2'+this.cliente.telefone2)
     console.log(' tel 3'+this.cliente.telefone3)
-    console.log(' email'+this.cliente.email.trim());
+   // console.log(' email'+this.cliente.email.trim());
    if(this.formCliente.form.valid){
       console.log(this.cliente);
       this.clienteService.cadastra(this.cliente).subscribe(res =>{

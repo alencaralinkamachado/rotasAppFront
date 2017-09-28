@@ -223,7 +223,7 @@ export class RotasComponent implements OnInit {
 
     for (let cli of this.clientes) {
 
-      if (cli.rota.id == 4) {        
+      if (cli.rota.img == 'semRota') {        
         
         var cliLatLng = new google.maps.LatLng(parseFloat(cli.latitude), parseFloat(cli.longitude));
         if (google.maps.geometry.poly.containsLocation(cliLatLng, this.selectedOverlay) === true) {
@@ -368,7 +368,7 @@ export class RotasComponent implements OnInit {
 
   dbClikPermiterMoverPonto({ target: marker }) {
     
-    if(this.clienteSelecionado.rota.id == 4){
+    if(this.clienteSelecionado.rota.img == 'semRota'){
       swal("AVISO!", "Cliente sem rota! Adicione o cliente em alguma ROTA para ter permissão de alterar seus dados", "info");
     }else{
       marker.setDraggable(true);
