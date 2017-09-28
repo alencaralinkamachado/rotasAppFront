@@ -1,18 +1,24 @@
 <div class="row">
 
   <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
-    selectedOverlay: {{selectedOverlay}} <br/>
-    <button (click)="deleteSelectedOverlay()">CANCELAR</button>
+    <div class="form-group">
+      <button class="btn btn-danger center-block" (click)="deleteSelectedOverlay()">CANCELAR OPERAÇÃO</button>
+    </div>
     
-    <h4>Clientes Selecionados: {{clientesSelec.length + clientesSelecAlterar.length}}</h4>
-
+    
+    <!--<h4>Clientes Selecionados: {{clientesSelec.length + clientesSelecAlterar.length}}</h4>-->    
+    <h4 class="bg-warning text-center">
+        Clientes Selecionados -> 
+        <strong>{{clientesSelec.length + clientesSelecAlterar.length}}</strong>      
+    </h4>
     <div class="form-group">
       <label for="rota">Rota:</label>
       <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
               <option *ngFor="let r of rotas" [value]="r.id"> 
-               {{r.id}} - {{r.nome}}
+                  
+                  {{r.id}} - {{r.nome}}
               </option>
-            </select>
+      </select>
 
     </div>
     <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
@@ -22,9 +28,8 @@
       <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th>Nome/Endereço</th>
-              <th>OK
-                <th>
+              <th>Nome/Endereço/Rota</th>
+              <th>OK<th>
             </tr>
           </thead>
           <tbody>
