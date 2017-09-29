@@ -71,9 +71,9 @@ export class CadastrarClienteComponent implements OnInit {
     this.cliente.latitude = this.cliente.latitude.trim();
 
     if(this.cliente.latitude.toString().charAt(3) != '.' || this.cliente.longitude.toString().charAt(3) != '.'){
-      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX ", "info");
+      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX e ser somente NÚMEROS", "info");
     } else  if(!this.cliente.latitude.startsWith('-') || !this.cliente.longitude.startsWith('-')){
-        swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX ", "info");
+      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX e ser somente NÚMEROS", "info");
       }else{
         if(this.formCliente.form.valid){
           console.log(this.cliente);

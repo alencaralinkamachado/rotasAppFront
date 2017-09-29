@@ -50,6 +50,7 @@ export class EditarClienteComponent implements OnInit {
       console.log('rua ' + this.cliente.rua.nome);
       console.log('id rota ' + this.cliente.rota.id);
       console.log('rota ' + this.cliente.rota.nome);
+      console.log(' cpf '+this.cliente.cpf);
     })
   }
 
