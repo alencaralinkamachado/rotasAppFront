@@ -30,6 +30,12 @@ export class ClienteService extends AbstractService{
    .catch(error => ("e"));
  }
 
+ update(cliente : Cliente) : Observable<String>{
+   return this.http.put(this.CLIENTE_URL, JSON.stringify(cliente), {headers : this.headers})
+   .map( () => ("ATUALIZADO com sucesso"))
+   .catch(error =>("e"));
+ }
+
  listaClientes() : Observable<Cliente[]>{
    return this.http.get(this.CLIENTE_URL+'/clientes')
    .map(response => response.json() as Cliente)
@@ -53,5 +59,7 @@ export class ClienteService extends AbstractService{
    .map(response => response.json())
   .catch(error => Observable.throw(error));
  }
+
+
 
 }

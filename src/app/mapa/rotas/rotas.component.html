@@ -1,35 +1,37 @@
-<div class="row">
+<div [ngBusy]="busy">
+  <div class="row">
 
-  <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
-    <div class="form-group">
-      <button class="btn btn-danger center-block" (click)="deleteSelectedOverlay()">CANCELAR OPERAÇÃO</button>
-    </div>
-    
-    
-    <!--<h4>Clientes Selecionados: {{clientesSelec.length + clientesSelecAlterar.length}}</h4>-->    
-    <h4 class="bg-warning text-center">
-        Clientes Selecionados -> 
-        <strong>{{clientesSelec.length + clientesSelecAlterar.length}}</strong>      
-    </h4>
-    <div class="form-group">
-      <label for="rota">Rota:</label>
-      <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
+    <div *ngIf="ativarCriacaoRotaClientes" class="col-md-4">
+      <div class="form-group">
+        <button class="btn btn-danger center-block" (click)="deleteSelectedOverlay()">CANCELAR OPERAÇÃO</button>
+      </div>
+
+
+      <!--<h4>Clientes Selecionados: {{clientesSelec.length + clientesSelecAlterar.length}}</h4>-->
+      <h4 class="bg-warning text-center">
+        Clientes Selecionados ->
+        <strong>{{clientesSelec.length + clientesSelecAlterar.length}}</strong>
+      </h4>
+      <div class="form-group">
+        <label for="rota">Rota:</label>
+        <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
               <option *ngFor="let r of rotas" [value]="r.id"> 
                   
                   {{r.id}} - {{r.nome}}
               </option>
       </select>
 
-    </div>
-    <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
-    <div *ngIf="ativarTabela_Alterar_ClientesRota">
+      </div>
+      <!-- <h5 *ngFor="let cli of clientesSelec">{{cli.nome}}</h5> -->
+      <div *ngIf="ativarTabela_Alterar_ClientesRota">
         <h5>Atualizar <strong>{{clientesSelecAlterar.length}}</strong> Clientes ?</h5>
-      <button class="btn btn-primary" (click)="alterarClientesRota()">Atualizar</button>
-      <table class="table table-hover table-striped">
+        <button class="btn btn-primary" (click)="alterarClientesRota()">Atualizar</button>
+        <table class="table table-hover table-striped">
           <thead>
             <tr>
               <th>Nome/Endereço/Rota</th>
-              <th>OK<th>
+              <th>OK
+                <th>
             </tr>
           </thead>
           <tbody>
@@ -43,78 +45,79 @@
               </td>
             </tr>
           </tbody>
-    
+
         </table>
-    </div>
+      </div>
 
-    <div *ngIf="ativarTabelaIncluirClientesNovosRota">
-        <h5>Incluir <strong>{{clientesSelec.length}}</strong> Clientes ?</h5>  
-      <button class="btn btn-primary" (click)="incluirClientesRota()">Incluir</button>
+      <div *ngIf="ativarTabelaIncluirClientesNovosRota">
+        <h5>Incluir <strong>{{clientesSelec.length}}</strong> Clientes ?</h5>
+        <button class="btn btn-primary" (click)="incluirClientesRota()">Incluir</button>
         <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                <th>Nome/Endereço</th>
-                <th>OK
-                  <th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let cli of clientesSelec">
-                <td>
-                  <strong>{{cli.nome}}</strong>
-                  <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
-                </td>
-                <td>
-                  <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
-                </td>
-              </tr>
-            </tbody>
-      
-          </table>
+          <thead>
+            <tr>
+              <th>Nome/Endereço</th>
+              <th>OK
+                <th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cli of clientesSelec">
+              <td>
+                <strong>{{cli.nome}}</strong>
+                <p>{{cli.rua.nome}} - {{cli.numero}} - {{cli.complemento}}</p>
+              </td>
+              <td>
+                <input type="checkbox" value="{{cli.id}}" name="{{cli}}" [(ngModel)]="cli.checked" checked>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
 
     </div>
 
+    <div *ngIf="ativarAutalizacaoCliente" class="col-md-4">
 
+      <h3>Dados Clientes</h3>
 
-  </div>
+      <form>
+        <div class="well">
+          <div class="row">
 
-  <div *ngIf="ativarAutalizacaoCliente" class="col-md-4">
-
-    <h3>Dados Clientes</h3>
-
-    <form>
-      <div class="well">
-        <div class="row">
-
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="nome">Nome:</label>
-              <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome" disabled>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome"
+                  disabled>
+              </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="cpf">CPF:</label>
-              <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+              </div>
             </div>
-          </div>
-          <!-- <div class="col-md-3">
+            <!-- <div class="col-md-3">
                       <div class="form-group">
                         <label for="codCorreio">Cód Correio:</label>
                         <input type="number" class="form-control"  name="codCorreio" id="codCorreio" placeholder="código do correio" 
                         [(ngModel)]="clienteSelecionado.codCorreio">
                       </div>
                     </div> -->
-        </div>
-
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="ondeDeixar">Onde deixar:</label>
-            <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?" [(ngModel)]="clienteSelecionado.ondeDeixar">
           </div>
-        </div>
 
-        <!--  <legend>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="ondeDeixar">Onde deixar:</label>
+              <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?" [(ngModel)]="clienteSelecionado.ondeDeixar">
+            </div>
+          </div>
+
+          <!--  <legend>
                    <strong> Endereço </strong>
                   </legend>
                   <div class="row">
@@ -146,51 +149,51 @@
                         </div>
                     </div>
                   </div> -->
-        <legend>
-          <strong>  Coordenadas </strong>
-        </legend>
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="rota">Rota:</label>
-            <select name="rota" class="form-control" [(ngModel)]="clienteSelecionado.rota.id" required>
+          <legend>
+            <strong>  Coordenadas </strong>
+          </legend>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="rota">Rota:</label>
+              <select name="rota" class="form-control" [(ngModel)]="clienteSelecionado.rota.id" required>
                                 <option *ngFor="let r of rotas" [value]="r.id"> 
                                  {{r.id}} - {{r.nome}}
                                 </option>
                    </select>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="latitude">Latitude:</label>
-              <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" [(ngModel)]="clienteSelecionado.latv">
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="latitude">Latitude:</label>
+                <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude da casa" [(ngModel)]="clienteSelecionado.latv">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="latitude">Longitude:</label>
+                <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" [(ngModel)]="clienteSelecionado.lngv">
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="latitude">Longitude:</label>
-              <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude da casa" [(ngModel)]="clienteSelecionado.lngv">
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <input (click)="ativaStreetViewMap()" type="checkbox"> Ativar StreetViewPanorama? <br>
             </div>
           </div>
         </div>
+        <div class="form-group text-center">
+          <button type="submit" (click)="fecharFromAtualizacao()" class=" btn btn-primary">CANCELAR</button>
+          <button type="submit" (click)="atualizar()" class=" btn btn-success">Atualizar</button>
 
-        <div class="row">
-          <div class="form-group col-md-12">
-            <input (click)="ativaStreetViewMap()" type="checkbox"> Ativar StreetViewPanorama? <br>
-          </div>
         </div>
-      </div>
-      <div class="form-group text-center">
-        <button type="submit" (click)="fecharFromAtualizacao()" class=" btn btn-primary">CANCELAR</button>
-        <button type="submit" (click)="atualizar()" class=" btn btn-success">Atualizar</button>
 
-      </div>
+      </form>
 
-    </form>
-
-  </div>
-  <!-- fim div formulario cliente -->
+    </div>
+    <!-- fim div formulario cliente -->
 
 
-  <!-- 
+    <!-- 
 
               <marker *ngFor="let cli of clientes" 
           (dblclick)="permiterMoverPonto($event)" (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)"
@@ -216,40 +219,41 @@
            (mapReady$)="onMapReady($event)"
              -->
 
-  <div class="col-md-{{larguraMapa}}">
+    <div class="col-md-{{larguraMapa}}">
 
-    <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.33778316185373, -54.326743862426724">
+      <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.33778316185373, -54.326743862426724">
 
-      <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="dbClikPermiterMoverPonto($event)"
-        (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
+        <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="dbClikPermiterMoverPonto($event)"
+          (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
 
 
-        <info-window id="iw">
-          <!--   <div *ngIf="marker.display">
+          <info-window id="iw">
+            <!--   <div *ngIf="marker.display">
             lat: {{ marker.lat }}, lng: {{ marker.lng }}
             <br /><strong>{{marker.title}}</strong> 
           </div> -->
 
-          <div *ngIf="marker.display" id="content">
-            <div id="siteNotice"></div>
-            <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
-            <div id="bodyContent">
-              <p>
-                <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left" /> O cliente
-                <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br
-                /> e pertence a rota <strong>{{marker.nomeRota}}</strong> </p>
-              <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
+            <div *ngIf="marker.display" id="content">
+              <div id="siteNotice"></div>
+              <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
+              <div id="bodyContent">
+                <p>
+                  <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left" /> O
+                  cliente
+                  <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br
+                  /> e pertence a rota <strong>{{marker.nomeRota}}</strong> </p>
+                <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
                           https://en.wikipedia.org/w/index.php?title=Uluru</a> (last visited June 22, 2009).</p>
+              </div>
             </div>
-          </div>
 
-        </info-window>
-      </marker>
-
+          </info-window>
+        </marker>
 
 
 
-      <!-- <custom-marker *ngFor="let cli of clientes" (click)="clicked($event)"
+
+        <!-- <custom-marker *ngFor="let cli of clientes" (click)="clicked($event)"
       (initialized$)="onCustomMarkerInit($event)">
         <div>
           <b>Hi, USA</b>
@@ -257,7 +261,7 @@
         </div>
       </custom-marker> -->
 
-      <!--    <custom-marker *ngFor="let cli of clientes"  [position]="[cli.latitude, cli.longitude]" (click)="clicked1($event)" (initialized$)="onCustomMarkerInit($event)">
+        <!--    <custom-marker *ngFor="let cli of clientes"  [position]="[cli.latitude, cli.longitude]" (click)="clicked1($event)" (initialized$)="onCustomMarkerInit($event)">
         <div>
           <b>Hi, USA</b>
           <img src="http://icons.iconarchive.com/icons/custom-icon-design/2014-world-cup-flags/32/USA-icon.png" />
@@ -266,17 +270,17 @@
             lat: {{pos.lat}}, lng: {{ pos.lng }}
           </info-window>
       </custom-marker> -->
-      <!--- interpolation within info-window is from this component scope -->
+        <!--- interpolation within info-window is from this component scope -->
 
 
-      <marker position="-30.340521, -54.320244" [icon]="{
+        <marker position="-30.340521, -54.320244" [icon]="{
             url: '../../assets/img/markerSolidBack.png',
             anchor: [16,16],
             size: [52,52],
             scaledSize: [72,72]
           }">
-      </marker>
-      <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
+        </marker>
+        <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>
           <marker [position]="[-30.342013, -54.339090]" ></marker>
           <marker [position]="[-30.331457, -54.317887]" ></marker> 
         drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
@@ -296,7 +300,7 @@
           }"
         -->
 
-      <drawing-manager [drawingControl]="true" [drawingControlOptions]="{
+        <drawing-manager [drawingControl]="true" [drawingControlOptions]="{
             position: 6,
             drawingModes: ['polygon']
            }" [circleOptions]="{
@@ -307,17 +311,17 @@
             zIndex: 1
           }"></drawing-manager>
 
-    </ngui-map>
+      </ngui-map>
+
+
+
+    </div>
 
 
 
   </div>
 
-
-
-</div>
-
-<!-- <ngui-map 
+  <!-- <ngui-map 
   zoom="13" 
   center="37.775, -122.434" 
   (mapReady$)="onMapReady($event)"
@@ -328,22 +332,22 @@
       [position]="pos"
       (initialized$)="onMarkerInit($event)"></marker>
 </ngui-map> -->
-<div class="row">
+  <div class="row">
 
-  <div *ngIf="ativaStreetView">
-    <h3>Casa do Cliente {{ clienteSelecionado.nome }}</h3>
-    <ngui-map center="{{ marker. lat }}, {{ marker.lng }}" zoom="18" map-type-id="MapTypeId.SATELLITE" tilt="45">
+    <div *ngIf="ativaStreetView">
+      <h3>Casa do Cliente {{ clienteSelecionado.nome }}</h3>
+      <ngui-map center="{{ marker. lat }}, {{ marker.lng }}" zoom="18" map-type-id="MapTypeId.SATELLITE" tilt="45">
 
-      <street-view-panorama position="{{ marker. lat }}, {{ marker.lng }}" pov="{heading: 100, pitch: 0}" id="te" zoom="1" (position_changed)="moveuPonto($event)"
-        (maptypeid_changed)="posicao($event)">
-
-
-
-      </street-view-panorama>
-    </ngui-map>
+        <street-view-panorama position="{{ marker. lat }}, {{ marker.lng }}" pov="{heading: 100, pitch: 0}" id="te" zoom="1" (position_changed)="moveuPonto($event)"
+          (maptypeid_changed)="posicao($event)">
 
 
-    <!-- 
+
+        </street-view-panorama>
+      </ngui-map>
+
+
+      <!-- 
                <div id="sv"></div>  
                streetView="StreetViewPanorama( document.querySelector('div#sv'), {position:new google.maps.LatLng({{ marker. lat }}, {{ marker.lng }})})"
     .addListener('position_changed', function() { moveuPonto($event);})
@@ -356,6 +360,7 @@
                 </street-view-panorama>
               -->
 
-  </div>
+    </div>
 
+  </div>
 </div>

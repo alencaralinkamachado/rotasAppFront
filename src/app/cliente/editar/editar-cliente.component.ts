@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs';
+
 import { ClienteService } from '../services';
 import { RotaService } from '../../mapa/services';
 import { Cliente, Rua, Rota, Cidade } from '../../model';
+
+declare var swal: any;
 
 @Component({
   selector: 'app-editar-cliente',
@@ -11,56 +16,92 @@ import { Cliente, Rua, Rota, Cidade } from '../../model';
 })
 export class EditarClienteComponent implements OnInit {
 
-  public cliente : Cliente;
-  public rotas : Rota[] = [];
-  public ruas : Rua[] = []; 
+  busy: Subscription;
 
-  constructor(private router : Router, private route : ActivatedRoute, private clienteService : ClienteService, private rotaService : RotaService) { }
+  public cliente: Cliente;
+  public rotas: Rota[] = [];
+  public ruas: Rua[] = [];
+
+  constructor(private router: Router, private route: ActivatedRoute, private clienteService: ClienteService, private rotaService: RotaService) { }
 
 
 
-  ngOnInit() {    
+  ngOnInit() {
     const id = +this.route.snapshot.params['id'];
-    console.log('id cliente ....'+id);    
+    console.log('id cliente ....' + id);
     this.buscaPorId(id);
     this.listarRotas();
     this.listarRuas();
     this.iniciaCliente();
   }
 
-  iniciaCliente() : void{
+  iniciaCliente(): void {
     this.cliente = new Cliente();
     this.cliente.rua = new Rua();
     this.cliente.rota = new Rota(1);
     this.cliente.cidade = new Cidade(1, "São Gabriel");
   }
 
-  buscaPorId(id : number) : void {
-    this.clienteService.buscaPorId(id).subscribe( res =>{
+  buscaPorId(id: number): void {
+    this.busy = this.clienteService.buscaPorId(id).subscribe(res => {
       this.cliente = res;
-      console.log('---> '+this.cliente.nome);
-      console.log('id rua '+this.cliente.rua.id);
-      console.log('rua '+this.cliente.rua.nome);
-      console.log('id rota '+this.cliente.rota.id);
-      console.log('rota '+this.cliente.rota.nome);
+      console.log('---> ' + this.cliente.nome);
+      console.log('id rua ' + this.cliente.rua.id);
+      console.log('rua ' + this.cliente.rua.nome);
+      console.log('id rota ' + this.cliente.rota.id);
+      console.log('rota ' + this.cliente.rota.nome);
     })
   }
 
-  listarRotas() : void {
-    this.rotaService.listarRotasPorCidade().subscribe ( rotas => {
+  listarRotas(): void {
+    this.rotaService.listarRotasPorCidade().subscribe(rotas => {
       this.rotas = rotas;
     });
-}
+  }
 
-listarRuas() : void{
-  this.clienteService.listarRuas().subscribe( ruas => {
-    this.ruas = ruas;
-    console.log(this.ruas);
-  }, erro => console.log(erro));
-}
+  listarRuas(): void {
+    this.clienteService.listarRuas().subscribe(ruas => {
+      this.ruas = ruas;
+      console.log(this.ruas);
+    }, erro => console.log(erro));
+  }
 
-atualizar() : void{
-  console.log(' -- atualizar --'+this.cliente);
-}
+  atualizar(): void {
+    console.log(' -- atualizar --');
+    var cli = this.cliente;
+    console.log('id ' + cli.id + ' nome: ' + cli.nome + ' cpf: ' + cli.cpf + ' codCorrreio: ' + cli.codCorreio);
+    console.log('ondEixar: ' + cli.ondeDeixar + ' ruaId: ' + cli.rua.id + ' ruaNome: ' + cli.rua.nome + ' N: ' + cli.numero);
+    console.log(' idCidade: ' + cli.cidade.id + ' nomeCidade: ' + cli.cidade.nome + ' lat: ' + cli.latitude + ' long: ' + cli.longitude);
+    console.log('comp: ' + cli.complemento + ' email: ' + cli.email + ' tel1: ' + cli.telefone1 + ' tel2: ' + cli.telefone2);
+    console.log('tel3: ' + cli.telefone3 + ' idRota: ' + cli.rota.id + ' rotaNome: ' + cli.rota.nome)
+
+    this.cliente.longitude = this.cliente.longitude.trim();
+    this.cliente.latitude = this.cliente.latitude.trim();
+
+    
+    if (this.cliente.latitude.toString().charAt(3) != '.' || this.cliente.longitude.toString().charAt(3) != '.') {
+      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX e ser somente NÚMEROS", "info");
+    } else if (!this.cliente.latitude.startsWith('-') || !this.cliente.longitude.startsWith('-')) {
+      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX e ser somente NÚMEROS", "info");
+    } else {
+
+      this.busy = this.clienteService.update(this.cliente).subscribe(res => {
+        if (res === 'e') {
+          swal("ERRO!", "Cliente não Atualizado! Informe o suporte.", "error");
+        } else {
+          swal("Sucesso!", this.cliente.nome + " " + res, "success");
+          this.iniciaCliente();
+          this.router.navigate(['/listar_cliente']);
+        }
+      });
+
+    }
+
+
+
+  }
+  voltar(): void {
+    this.router.navigate(['/listar_cliente']);
+  }
 
 }

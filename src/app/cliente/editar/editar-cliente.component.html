@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngBusy]="busy">
     
       <h1>EDITAR cliente {{cliente.nome}}</h1>
     
@@ -32,7 +32,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="codCorreio">Código Correio:</label>
-                <input type="number" class="form-control" name="codCorreio" id="codCorreio" placeholder="código do correio" [(ngModel)]="cliente.codCorreio">
+                <input type="number" class="form-control" name="codCorreio" maxlength="9"  id="codCorreio" placeholder="código do correio" [(ngModel)]="cliente.codCorreio">
               </div>
             </div>
           </div>
@@ -136,6 +136,11 @@
           </div>
         </div>
         <div class="form-group text-center">
+          <button type="submit" class=" btn btn-info" (click)="voltar()">
+              <span class="glyphicon glyphicon-chevron-left" 
+              aria-hidden="true"></span> 
+            Voltar            
+          </button>
           <button type="submit" class=" btn btn-success" [disabled]="!formCliente.form.valid" (click)="atualizar()">Atualizar</button>
         </div>
         

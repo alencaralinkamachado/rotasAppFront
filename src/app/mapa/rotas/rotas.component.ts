@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { DrawingManager, NguiMap, NguiMapComponent } from '@ngui/map';
 import { Router} from '@angular/router';
 
+import {Subscription} from 'rxjs';
 
 import { ClienteService } from '../../cliente';
 import { Rua, Cliente, Cidade, Rota } from '../../model';
@@ -17,6 +18,8 @@ declare var swal: any;
   styleUrls: ['./rotas.component.css']
 })
 export class RotasComponent implements OnInit {
+
+  busy: Subscription;
 
   //clientes selecionados para montar rota
   private clientesSelec: Cliente[] = [];
@@ -81,8 +84,10 @@ export class RotasComponent implements OnInit {
    * Carrega todos os clientes do backend
    */
   carregaClientes(): void {
-    this.clienteService.listaClientes().subscribe(clientes => {
+    this.busy = this.clienteService.listaClientes().subscribe(clientes => {
       this.clientes = clientes;
+      // var str = "-53.65656"; var n = str.startsWith("-");
+      
 
       /*  this.clienteTemp = clientes;
         console.log(this.clienteTemp);
@@ -502,7 +507,7 @@ export class RotasComponent implements OnInit {
     };
     this.markerInstanciaSelecionadoMapa.setIcon(image);
 
-    this.clienteService.atualiza_lat_lng(this.clienteSelecionado).subscribe(res => {
+    this.busy =  this.clienteService.atualiza_lat_lng(this.clienteSelecionado).subscribe(res => {
 
       if (res === 'e') {
         swal("ERRO!", "Problemas na atulização das coordenadas", "error");
@@ -546,7 +551,7 @@ export class RotasComponent implements OnInit {
       }
 
       this.rotaSelecionada.clientes = clien;
-      this.rotaService.incluiClientesRota(this.rotaSelecionada).subscribe(res => {
+      this.busy = this.rotaService.incluiClientesRota(this.rotaSelecionada).subscribe(res => {
         if (res === 'e') {
           swal("ERRO!", "Clientes não incluídos na ROTA! Informe o suporte", "error")
         } else {
@@ -591,7 +596,7 @@ alterarClientesRota(): void {
     }
 
     this.rotaSelecionada.clientes = clien;
-    this.rotaService.alteraClientesRota(this.rotaSelecionada).subscribe(res => {
+    this.busy = this.rotaService.alteraClientesRota(this.rotaSelecionada).subscribe(res => {
       if (res === 'e') {
         swal("ERRO!", "Clientes não incluídos na ROTA! Informe o suporte", "error")
       } else {

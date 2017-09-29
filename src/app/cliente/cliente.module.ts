@@ -13,12 +13,16 @@ import { PesquisarPipe } from './pipes';
 import { KzMaskDirective } from '../shared/directives/masked-input/kz-mask.directive';
 import { EditarClienteComponent } from './editar';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BusyModule} from 'angular2-busy';
 @NgModule({
   imports: [
     CommonModule,
     ClienteRoutingModule,
     HttpModule,    
-    FormsModule
+    FormsModule, 
+    BrowserAnimationsModule,
+    BusyModule,
   ],
   declarations: [
     CadastrarClienteComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {Subscription} from 'rxjs';
 
 import { Rota, Cliente } from '../../model';
 import { RotaService } from '../services';
@@ -13,7 +13,7 @@ import { ClienteService } from '../../cliente';
 })
 export class ListarRotaComponent implements OnInit {
 
- 
+  busy: Subscription;
 
   public rotas: Rota[] = [];
   public rotaSelecionada: Rota = new Rota();
@@ -23,13 +23,13 @@ export class ListarRotaComponent implements OnInit {
   constructor(private rotaService: RotaService, private clienteService : ClienteService) { }
 
   ngOnInit() {
-    this.rotaService.listarRotasPorCidade().subscribe( rotas =>{
+    this.busy = this.rotaService.listarRotasPorCidade().subscribe( rotas =>{
       this.rotas = rotas;
     });
   }
 
   buscaClientesPorRota(): void{
-    this.clienteService.listarClientesPorRota(this.rotaSelecionada).subscribe(clientes =>{
+    this.busy = this.clienteService.listarClientesPorRota(this.rotaSelecionada).subscribe(clientes =>{
       this.clientes = clientes;
     });
   }

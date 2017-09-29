@@ -11,13 +11,16 @@ import { MapaRoutingComponent } from './mapa-routing.component';
 import { MapaRoutingModule } from './mapa-routing.module';
 import { ListarRotaComponent } from './listar';
 
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BusyModule} from 'angular2-busy';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyA1lgTn2BQ2ZDHgvVKeDN174dousm8btkI&libraries=visualization,places,drawing'}),
     FormsModule,
+    BrowserAnimationsModule,
+    BusyModule,
     MapaRoutingModule    
   ],
   declarations: [

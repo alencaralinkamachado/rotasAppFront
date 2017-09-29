@@ -1,4 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
+import {Subscription} from 'rxjs';
+
 import { ClienteService } from '../services';
 import { RotaService } from '../../mapa/services';
 import { Rua, Cliente, Cidade, Rota } from '../../model';
@@ -15,6 +19,8 @@ declare var swal:any;
 })
 export class CadastrarClienteComponent implements OnInit {
 
+  busy: Subscription;
+
   @ViewChild('formCliente') formCliente: NgForm;
 
   public ruas : Rua[] = []; 
@@ -22,7 +28,7 @@ export class CadastrarClienteComponent implements OnInit {
   public cliente : Cliente;
   public rotas : Rota[] = [];
 
-  constructor(private clienteService : ClienteService, private rotaService : RotaService) { }
+  constructor(private clienteService : ClienteService, private rotaService : RotaService, private router : Router, ) { }
 
   ngOnInit() {
 
@@ -40,13 +46,14 @@ export class CadastrarClienteComponent implements OnInit {
 
   iniciaCliente(): void{
     this.cliente = new Cliente();
+    this.cliente.cpf = '';
     this.cliente.rua = new Rua();
     this.cliente.rota = new Rota(1);
     this.cliente.cidade = new Cidade(1, "São Gabriel");
   }
 
   listarRuas() : void{
-    this.clienteService.listarRuas().subscribe( ruas => {
+  this.busy = this.clienteService.listarRuas().subscribe( ruas => {
       this.ruas = ruas;
       console.log(this.ruas);
     }, erro => console.log(erro));
@@ -58,19 +65,38 @@ export class CadastrarClienteComponent implements OnInit {
     console.log(' tel 1'+this.cliente.telefone1)
     console.log(' tel 2'+this.cliente.telefone2)
     console.log(' tel 3'+this.cliente.telefone3)
-    console.log(' email'+this.cliente.email);
-   if(this.formCliente.form.valid){
-      console.log(this.cliente);
-      this.clienteService.cadastra(this.cliente).subscribe(res =>{
-        if(res === 'e'){
-          swal("ERRO!", "Cliente não cadastrado! Informe o suporte.", "error");
-        }else{
-          swal("Sucesso!", res, "success");
-        }
-        
-      });
-   }
-    this.iniciaCliente();
+    console.log(' longitude'+this.cliente.longitude);
+  
+    this.cliente.longitude = this.cliente.longitude.trim();
+    this.cliente.latitude = this.cliente.latitude.trim();
+
+    if(this.cliente.latitude.toString().charAt(3) != '.' || this.cliente.longitude.toString().charAt(3) != '.'){
+      swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX ", "info");
+    } else  if(!this.cliente.latitude.startsWith('-') || !this.cliente.longitude.startsWith('-')){
+        swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX ", "info");
+      }else{
+        if(this.formCliente.form.valid){
+          console.log(this.cliente);
+          this.busy =  this.clienteService.cadastra(this.cliente).subscribe(res =>{
+            if(res === 'e'){
+              swal("ERRO!", "Cliente não cadastrado! Informe o suporte.", "error");
+            }else{
+              swal("Sucesso!", res, "success");
+              this.iniciaCliente();
+              this.router.navigate(['/listar_cliente']);
+            }
+            
+          });
+       }
+      }
+    
+
+   
+   
+  }
+
+  voltar() : void{
+    this.router.navigate(['/listar_cliente']);
   }
 
 /*

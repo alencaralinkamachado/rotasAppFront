@@ -9,7 +9,7 @@ export class Cliente{
     public rota?: Rota){  }
 
 
-    public checked : boolean;
+    public checked : boolean; 
 
 }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import { Cliente } from '../../model';
 import { ClienteService } from '../services';
@@ -11,6 +12,8 @@ import { PesquisarPipe } from '../pipes';
   styleUrls: ['./listar-cliente.component.css']
 })
 export class ListarClienteComponent implements OnInit {
+
+  busy: Subscription;
 
   public clientes : Cliente[] = [];
 
@@ -25,7 +28,7 @@ export class ListarClienteComponent implements OnInit {
 
   
   listar() : void {
-    this.clienteService.listaClientes().subscribe(clientes =>{
+    this.busy = this.clienteService.listaClientes().subscribe(clientes =>{
       this.clientes = clientes;
     });
   }
