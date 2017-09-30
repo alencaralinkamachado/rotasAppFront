@@ -29,7 +29,7 @@ export class KzMaskDirective implements ControlValueAccessor {
   onChange: any;
 
   @Input('kzMask') kzMask: string;
-
+ 
   constructor(private el: ElementRef) {}
 
   writeValue(value: any): void {
@@ -56,7 +56,7 @@ export class KzMaskDirective implements ControlValueAccessor {
       return;
     }
 
-    let pad = this.kzMask.replace(/\D/g, '').replace(/9/g, '_');
+    let pad = this.kzMask.replace(/\D/g, '').replace(/9/g, '_');       
     if (valor.length <= pad.length) {
       this.onChange(valor);
     }

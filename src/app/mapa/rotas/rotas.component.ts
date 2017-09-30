@@ -410,6 +410,7 @@ export class RotasComponent implements OnInit {
     this.clienteSelecionado.lngv = parseFloat(this.clienteSelecionado.longitude);
     console.log('--->' + this.clienteSelecionado.nome);
     console.log('--->' + this.clienteSelecionado.latitude);
+    console.log('---> cpf' + this.clienteSelecionado.cpf);
     console.log('--->' + this.clienteSelecionado.rota.nome);
     //console.log('getTitle() .... '+marker.getTitle());
     //console.log(marker.cli);

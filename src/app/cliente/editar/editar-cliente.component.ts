@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { ClienteService } from '../services';
@@ -15,6 +15,8 @@ declare var swal: any;
   styleUrls: ['./editar-cliente.component.css']
 })
 export class EditarClienteComponent implements OnInit {
+
+  @ViewChild('formCliente') formCliente: NgForm;
 
   busy: Subscription;
 
@@ -67,6 +69,33 @@ export class EditarClienteComponent implements OnInit {
     }, erro => console.log(erro));
   }
 
+//tutorial sobre radio button e checkebox
+//http://www.concretepage.com/angular-2/angular-2-radio-button-and-checkbox-example
+
+  alteraAssinatura(): void{
+  
+    this.cliente.ativo = !this.formCliente.controls['ativo'].value;
+    var situacao : string;
+
+    if(this.cliente.ativo){
+      situacao = "ATIVAR"
+    }else{
+      situacao = "CANCELAR"
+    }
+               
+   swal({
+    title: 'ATENÇÃO!',
+    //text: "Você tem certeza que deseja alterar o estado dessa assinatura?",
+    html:
+    'Você vai <b>'+situacao+'</b> a assinatura do cliente <b>'+this.cliente.nome+'</b>',
+    type: 'warning',    
+    confirmButtonColor: '#3085d6',    
+    confirmButtonText: 'OK'
+  });
+
+    
+  }
+  
   atualizar(): void {
     console.log(' -- atualizar --');
     var cli = this.cliente;
@@ -75,6 +104,7 @@ export class EditarClienteComponent implements OnInit {
     console.log(' idCidade: ' + cli.cidade.id + ' nomeCidade: ' + cli.cidade.nome + ' lat: ' + cli.latitude + ' long: ' + cli.longitude);
     console.log('comp: ' + cli.complemento + ' email: ' + cli.email + ' tel1: ' + cli.telefone1 + ' tel2: ' + cli.telefone2);
     console.log('tel3: ' + cli.telefone3 + ' idRota: ' + cli.rota.id + ' rotaNome: ' + cli.rota.nome)
+    console.log(' ativo? ' + this.cliente.ativo)
 
     this.cliente.longitude = this.cliente.longitude.trim();
     this.cliente.latitude = this.cliente.latitude.trim();
@@ -86,7 +116,7 @@ export class EditarClienteComponent implements OnInit {
       swal("AVISO!", "Dados de localização devem estar no padrão -XX.XXXXXX e ser somente NÚMEROS", "info");
     } else {
 
-      this.busy = this.clienteService.update(this.cliente).subscribe(res => {
+       this.busy = this.clienteService.update(this.cliente).subscribe(res => {
         if (res === 'e') {
           swal("ERRO!", "Cliente não Atualizado! Informe o suporte.", "error");
         } else {
@@ -94,7 +124,7 @@ export class EditarClienteComponent implements OnInit {
           this.iniciaCliente();
           this.router.navigate(['/listar_cliente']);
         }
-      });
+      }); 
 
     }
 

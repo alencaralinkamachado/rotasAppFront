@@ -47,6 +47,7 @@ export class CadastrarClienteComponent implements OnInit {
   iniciaCliente(): void{
     this.cliente = new Cliente();
     this.cliente.cpf = '';
+    this.cliente.ativo = true;
     this.cliente.rua = new Rua();
     this.cliente.rota = new Rota(1);
     this.cliente.cidade = new Cidade(1, "São Gabriel");
@@ -59,14 +60,39 @@ export class CadastrarClienteComponent implements OnInit {
     }, erro => console.log(erro));
   }
 
+
+  alteraAssinatura(): void{
+    
+      this.cliente.ativo = !this.formCliente.controls['ativo'].value;
+      var situacao : string;
+  
+      if(this.cliente.ativo){
+        situacao = "ATIVAR"
+      }else{
+        situacao = "CANCELAR"
+      }
+                 
+     swal({
+      title: 'ATENÇÃO!',
+      //text: "Você tem certeza que deseja alterar o estado dessa assinatura?",
+      html:
+      'Você vai <b>'+situacao+'</b> a assinatura do cliente <b>'+this.cliente.nome+'</b>',
+      type: 'warning',    
+      confirmButtonColor: '#3085d6',    
+      confirmButtonText: 'OK'
+    });
+  
+      
+    }
+
   cadastrar():void{
     console.log('rota selecionada = '+this.cliente.rota.id);
     console.log(' cpf '+this.cliente.cpf);
     console.log(' tel 1'+this.cliente.telefone1)
     console.log(' tel 2'+this.cliente.telefone2)
     console.log(' tel 3'+this.cliente.telefone3)
-    console.log(' longitude'+this.cliente.longitude);
-  
+    console.log(' longitude: '+this.cliente.longitude);
+    console.log(' ativo: '+this.cliente.ativo)
     this.cliente.longitude = this.cliente.longitude.trim();
     this.cliente.latitude = this.cliente.latitude.trim();
 
@@ -86,7 +112,7 @@ export class CadastrarClienteComponent implements OnInit {
               this.router.navigate(['/listar_cliente']);
             }
             
-          });
+          }); 
        }
       }
     

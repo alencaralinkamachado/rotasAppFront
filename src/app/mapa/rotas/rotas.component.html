@@ -16,8 +16,7 @@
         <label for="rota">Rota:</label>
         <select name="rota" class="form-control" [(ngModel)]="rotaSelecionada.id" required>
               <option *ngFor="let r of rotas" [value]="r.id"> 
-                  
-                  {{r.id}} - {{r.nome}}
+                  {{r.nome}}
               </option>
       </select>
 
@@ -88,17 +87,17 @@
         <div class="well">
           <div class="row">
 
-            <div class="col-md-5">
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="nome cliente" [(ngModel)]="clienteSelecionado.nome"
                   disabled>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="number" class="form-control" id="cpf" placeholder="CPF" disabled>
+                <input type="number" class="form-control" id="cpf" name="cpf" placeholder="CPF" [(ngModel)]="clienteSelecionado.cpf" disabled>
               </div>
             </div>
             <!-- <div class="col-md-3">
@@ -108,14 +107,7 @@
                         [(ngModel)]="clienteSelecionado.codCorreio">
                       </div>
                     </div> -->
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label for="ondeDeixar">Onde deixar:</label>
-              <input type="text" class="form-control" name="ondeDeixar" id="ondeDeixar" placeholder="Onde deixar o jornal?" [(ngModel)]="clienteSelecionado.ondeDeixar">
-            </div>
-          </div>
+          </div>          
 
           <!--  <legend>
                    <strong> Endereço </strong>
@@ -157,7 +149,7 @@
               <label for="rota">Rota:</label>
               <select name="rota" class="form-control" [(ngModel)]="clienteSelecionado.rota.id" required>
                                 <option *ngFor="let r of rotas" [value]="r.id"> 
-                                 {{r.id}} - {{r.nome}}
+                                 {{r.nome}}
                                 </option>
                    </select>
             </div>
@@ -274,10 +266,10 @@
 
 
         <marker position="-30.340521, -54.320244" [icon]="{
-            url: '../../assets/img/markerSolidBack.png',
+            url: '../../assets/img/markerBandeira.png',
             anchor: [16,16],
-            size: [52,52],
-            scaledSize: [72,72]
+            size: [92,92],
+            scaledSize: [92,92]
           }">
         </marker>
         <!-- <marker [position]="[-30.319248, -54.310070]" ></marker>

@@ -16,13 +16,11 @@ export class ListarClienteComponent implements OnInit {
   busy: Subscription;
 
   public clientes : Cliente[] = [];
-
+  public qtdClientesAtivos : number = 0;
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
-    
-   
-    
+
     this.listar();
   }
 
@@ -30,7 +28,16 @@ export class ListarClienteComponent implements OnInit {
   listar() : void {
     this.busy = this.clienteService.listaClientes().subscribe(clientes =>{
       this.clientes = clientes;
+      this.contadorClientesAtivos();
     });
+  }
+
+  contadorClientesAtivos() : void{
+    for(let cli of this.clientes){
+      if(cli.ativo){
+        this.qtdClientesAtivos++;
+      }
+    }
   }
 
 }
