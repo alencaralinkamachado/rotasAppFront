@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MapaRoutingComponent,  } from './mapa-routing.component';
 import { ListarRotaComponent } from './listar';
 import { RotasComponent } from './rotas';
+import { TrackComponent } from './track';
 
 export const MapaRouter : Routes = [
     {
@@ -15,6 +16,9 @@ export const MapaRouter : Routes = [
             },
             {
                 path : 'listarrotas', component : ListarRotaComponent
+            },
+            {
+                path : 'track', component : TrackComponent
             }
         ]
 

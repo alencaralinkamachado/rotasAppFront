@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AbstractService } from '../../abstract.service';
-import {  Rota} from '../../model';
+import { Rota, Track, Polyline} from '../../model';
+
 
 @Injectable()
 export class RotaService extends AbstractService  {
@@ -32,6 +33,41 @@ export class RotaService extends AbstractService  {
     .catch(error => ("e"));
   }
 
+  getTraks() : Observable<Polyline[]>{
+    return this.http.get(this.BASE_URL+'/track/polilynes')
+    .map(res => res.json() as Polyline)
+    .catch( error => Observable.throw(error));
+  }
+
+  getTraksDirceu() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackDirceu')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
+  
+  getTraksEverton() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackEverton')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
+  
+  trackDirceuInicio() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackDirceuInicio')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
+
+  trackHilario() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackHilario')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
+
+  trackEli() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackEli')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
 
 }
 

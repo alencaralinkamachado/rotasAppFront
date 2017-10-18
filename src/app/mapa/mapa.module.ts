@@ -13,6 +13,7 @@ import { ListarRotaComponent } from './listar';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
+import { TrackComponent } from './track/track.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +27,8 @@ import {BusyModule} from 'angular2-busy';
   declarations: [
     RotasComponent,    
     ListarRotaComponent,
-    MapaRoutingComponent
+    MapaRoutingComponent,
+    TrackComponent
   ],
   providers :[
     RotaService
