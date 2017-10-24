@@ -1,0 +1,11 @@
+<div [ngBusy]="busy">
+    <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.328088, -54.318763" mapTypeId="terrain"
+    scrollwheel="false">
+   
+    
+    <polyline [editable]="false" [path]="tracksHilario" [geodesic]="true" [strokeColor]="'#FF00C7'" [strokeOpacity]="1" [strokeWeight]="2">
+      </polyline>
+     
+    
+    </ngui-map>
+</div>

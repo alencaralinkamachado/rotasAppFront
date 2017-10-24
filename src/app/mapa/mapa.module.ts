@@ -14,6 +14,10 @@ import { ListarRotaComponent } from './listar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
 import { TrackComponent } from './track/track.component';
+import { TrackDirceuComponent } from './track/track-dirceu/track-dirceu.component';
+import { TrackPauloComponent } from './track/track-paulo/track-paulo.component';
+import { TrackEliComponent } from './track/track-eli/track-eli.component';
+import { TrackHilarioComponent } from './track/track-hilario/track-hilario.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +32,11 @@ import { TrackComponent } from './track/track.component';
     RotasComponent,    
     ListarRotaComponent,
     MapaRoutingComponent,
-    TrackComponent
+    TrackComponent,
+    TrackDirceuComponent,
+    TrackPauloComponent,
+    TrackEliComponent,
+    TrackHilarioComponent
   ],
   providers :[
     RotaService
