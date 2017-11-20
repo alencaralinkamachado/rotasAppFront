@@ -6,7 +6,8 @@ import { ListarRotaComponent } from './listar';
 import { RotasComponent } from './rotas';
 import { TrackComponent } from './track';
 import { TrackDirceuComponent,TrackPauloComponent, 
-    TrackEliComponent, TrackHilarioComponent } from '../mapa/track';
+    TrackEliComponent, TrackHilarioComponent, 
+    TrackPauloHilarioComponent, TrackLuizComponent } from '../mapa/track';
 
 export const MapaRouter : Routes = [
     {
@@ -33,6 +34,12 @@ export const MapaRouter : Routes = [
             },
             {
                 path : 'trackHilario', component : TrackHilarioComponent
+            },
+            {
+                path : 'trackPauloHilario', component : TrackPauloHilarioComponent
+            },
+            {
+                path : 'trackLuiz', component : TrackLuizComponent
             }
         ]
 

@@ -18,6 +18,8 @@ import { TrackDirceuComponent } from './track/track-dirceu/track-dirceu.componen
 import { TrackPauloComponent } from './track/track-paulo/track-paulo.component';
 import { TrackEliComponent } from './track/track-eli/track-eli.component';
 import { TrackHilarioComponent } from './track/track-hilario/track-hilario.component';
+import { TrackPauloHilarioComponent } from './track/track-paulo-hilario/track-paulo-hilario.component';
+import { TrackLuizComponent } from './track/track-luiz/track-luiz.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +38,9 @@ import { TrackHilarioComponent } from './track/track-hilario/track-hilario.compo
     TrackDirceuComponent,
     TrackPauloComponent,
     TrackEliComponent,
-    TrackHilarioComponent
+    TrackHilarioComponent,
+    TrackPauloHilarioComponent,
+    TrackLuizComponent
   ],
   providers :[
     RotaService

@@ -230,7 +230,7 @@
               <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
               <div id="bodyContent">
                 <p>
-                  <img style="max-height: 100px; max-width: 100px;" src="../../assets/img/cliente.jpg" align="left" /> O
+                  <img style="max-height: 120px; max-width: 120px;" src="{{ marker.foto }}" align="left" /> O
                   cliente
                   <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.nomeRua }} </b>, Nº <b> {{ marker.numero }}  </b> <br
                   /> e pertence a rota <strong>{{marker.nomeRota}}</strong> </p>
@@ -242,7 +242,7 @@
           </info-window>
         </marker>
 
-
+     
 
 
         <!-- <custom-marker *ngFor="let cli of clientes" (click)="clicked($event)"

@@ -16,6 +16,7 @@ export class TrackComponent implements OnInit {
   tracksEli : Track[] = [];
   tracksDirceuInicio: Track[] = [];
   tracksHilario: Track[] = [];
+  tracksLuiz: Track[] = [];
 
   polylines : Polyline [] = [];
 
@@ -29,6 +30,10 @@ export class TrackComponent implements OnInit {
   constructor(private _rotaService: RotaService) { }
 
   ngOnInit() {
+
+    this._rotaService.trackLuiz().subscribe(tracksLuiz =>{
+      this.tracksLuiz = tracksLuiz;
+    });
 
     this._rotaService.getTraksDirceu().subscribe(trackDirceu =>{
       this.tracksDirceu = trackDirceu;

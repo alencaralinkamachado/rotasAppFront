@@ -69,6 +69,12 @@ export class RotaService extends AbstractService  {
     .catch( error => Observable.throw(error));
   }
 
+  trackLuiz() : Observable<Track[]>{
+    return this.http.get(this.BASE_URL+'/track/trackLuiz')
+    .map(res => res.json() as Track)
+    .catch( error => Observable.throw(error));
+  }
+
 }
 
 

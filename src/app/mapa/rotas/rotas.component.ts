@@ -394,7 +394,8 @@ export class RotasComponent implements OnInit {
     nome: null,
     nomeRua: null,
     numero: null,
-    nomeRota: null
+    nomeRota: null,
+    foto : null
   };
   clicked({ target: marker }, cli: Cliente) {
     this.markerInstanciaSelecionadoMapa = marker;
@@ -404,6 +405,7 @@ export class RotasComponent implements OnInit {
     this.marker.nome = cli.nome;
     this.marker.nomeRua = cli.rua.nome;
     this.marker.numero = cli.numero;
+    this.marker.foto = cli.foto;
     this.marker.nomeRota = cli.rota.nome;
     this.clienteSelecionado = cli;
     this.clienteSelecionado.latv = parseFloat(this.clienteSelecionado.latitude);
