@@ -75,6 +75,12 @@ export class RotaService extends AbstractService  {
     .catch( error => Observable.throw(error));
   }
 
+  tracktcx() : Observable<Polyline>{
+    return this.http.get(this.BASE_URL+'/tracktcx/tcx')
+    .map(res => res.json() as Polyline)
+    .catch( error => Observable.throw(error));
+  }
+
 }
 
 

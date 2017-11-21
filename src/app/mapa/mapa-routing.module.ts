@@ -7,7 +7,7 @@ import { RotasComponent } from './rotas';
 import { TrackComponent } from './track';
 import { TrackDirceuComponent,TrackPauloComponent, 
     TrackEliComponent, TrackHilarioComponent, 
-    TrackPauloHilarioComponent, TrackLuizComponent } from '../mapa/track';
+    TrackPauloHilarioComponent, TrackLuizComponent, TracksTcxComponent } from '../mapa/track';
 
 export const MapaRouter : Routes = [
     {
@@ -40,6 +40,9 @@ export const MapaRouter : Routes = [
             },
             {
                 path : 'trackLuiz', component : TrackLuizComponent
+            },
+            {
+                path : 'tracktcx', component : TracksTcxComponent 
             }
         ]
 

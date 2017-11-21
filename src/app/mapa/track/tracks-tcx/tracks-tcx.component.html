@@ -1,0 +1,14 @@
+<div [ngBusy]="busy">
+  <ngui-map style="height:90vh; width:100%;" zoom="14" center="-29.700715, -53.83742833" mapTypeId="terrain"
+  scrollwheel="false">
+ 
+  
+  <polyline [editable]="false" [path]="tracks" [geodesic]="true" [strokeColor]="'#FF0000'" [strokeOpacity]="1" [strokeWeight]="2">
+    </polyline>
+   
+   <!-- <marker *ngFor="let cli of entregas" (initialized$)="onCustomMarkerInit($event, cli)" (dblclick)="dbClikPermiterMoverPonto($event)"
+    (dragend)="moveuPonto($event)" [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)"> -->
+    <marker *ngFor="let pos of entregas" [position]="[pos.lat, pos.lng]"></marker>
+  </ngui-map>
+</div>
+
