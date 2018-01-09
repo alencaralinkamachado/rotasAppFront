@@ -21,6 +21,11 @@ import { TrackHilarioComponent } from './track/track-hilario/track-hilario.compo
 import { TrackPauloHilarioComponent } from './track/track-paulo-hilario/track-paulo-hilario.component';
 import { TrackLuizComponent } from './track/track-luiz/track-luiz.component';
 import { TracksTcxComponent } from './track/tracks-tcx/tracks-tcx.component';
+import { NovoMapaComponent } from './novoBack/novo-mapa/novo-mapa.component';
+import { NovoBackClienteService } from '../mapa/novoBack/service/novo-back-cliente.service';
+import { EditarClienteComponent } from './novoBack/editar-cliente/editar-cliente.component';
+import { ListarClienteComponent } from './novoBack/listar-cliente/listar-cliente.component';
+import { PequisaClientesPipePipe } from './novoBack/pipe/pequisa-clientes-pipe.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,10 +47,15 @@ import { TracksTcxComponent } from './track/tracks-tcx/tracks-tcx.component';
     TrackHilarioComponent,
     TrackPauloHilarioComponent,
     TrackLuizComponent,
-    TracksTcxComponent
+    TracksTcxComponent,
+    NovoMapaComponent,
+    EditarClienteComponent,
+    ListarClienteComponent, 
+    PequisaClientesPipePipe
   ],
   providers :[
-    RotaService
+    RotaService,
+    NovoBackClienteService
   ]
 })
 export class MapaModule { }

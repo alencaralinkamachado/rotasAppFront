@@ -8,7 +8,9 @@ import { TrackComponent } from './track';
 import { TrackDirceuComponent,TrackPauloComponent, 
     TrackEliComponent, TrackHilarioComponent, 
     TrackPauloHilarioComponent, TrackLuizComponent, TracksTcxComponent } from '../mapa/track';
-
+import { NovoMapaComponent } from './novoBack/novo-mapa/novo-mapa.component';
+import { ListarClienteComponent } from './novoBack/listar-cliente/listar-cliente.component';
+import { EditarClienteComponent } from './novoBack/editar-cliente/editar-cliente.component';
 export const MapaRouter : Routes = [
     {
         path : 'mapa',
@@ -43,6 +45,18 @@ export const MapaRouter : Routes = [
             },
             {
                 path : 'tracktcx', component : TracksTcxComponent 
+            },
+            {
+                path : 'novomapa', component : NovoMapaComponent
+            },
+            {
+                path : 'listarcliente', component : ListarClienteComponent,
+                children : [
+                    {
+                        path : 'editarcliente/:id',
+                        component : EditarClienteComponent
+                    }   
+                ]
             }
         ]
 

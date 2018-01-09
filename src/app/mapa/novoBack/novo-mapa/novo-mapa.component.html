@@ -1,0 +1,64 @@
+<div [ngBusy]="busy">
+  <div class="row">
+
+      <div class="col-md-{{larguraMapa}}">
+
+          <ngui-map style="height:90vh; width:100%;" zoom="14" center="-30.33778316185373, -54.326743862426724">
+        <!--
+
+(dblclick)="dbClikPermiterMoverPonto($event)"
+(dragend)="moveuPonto($event)"
+         -->
+            <marker *ngFor="let cli of clientes" (initialized$)="onCustomMarkerInit($event, cli)" 
+               [position]="[cli.latitude, cli.longitude]" (click)="clicked($event, cli)">
+        
+        
+              <info-window id="iw">
+        
+                <div *ngIf="marker.display" id="content">
+                  <div id="siteNotice"></div>
+                  <h1 id="firstHeading" class="firstHeading">{{ marker.nome }}</h1>
+                  <div id="bodyContent">
+                    <p>
+                      <img style="max-height: 120px; max-width: 120px;" src="{{ marker.foto }}" align="left" /> O
+                      cliente
+                      <b>{{marker.nome}}</b>, reside na rua <b> {{ marker.end1 }} </b>, Nº <b> {{ marker.numero }}  </b> <br
+                      /> e pertence a rota <strong>{{marker.nomeRota}}</strong> </p>
+                    <p>Link do Facebook: , <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">  
+                              https://en.wikipedia.org/w/index.php?title=Uluru</a> (last visited June 22, 2009).</p>
+                  </div>
+                </div>
+        
+              </info-window>
+            </marker>
+                
+           <!--  <marker position="-30.340521, -54.320244" [icon]="{
+                url: '../../assets/img/markerBandeira.png',
+                anchor: [16,16],
+                size: [92,92],
+                scaledSize: [92,92]
+              }">
+            </marker>
+
+           <drawing-manager [drawingControl]="true" [drawingControlOptions]="{
+                position: 6,
+                drawingModes: ['polygon']
+               }" [circleOptions]="{
+                fillColor: '#ffff00',
+                fillOpacity: 1,
+                strokeWeight: 5,
+                editable: true,
+                zIndex: 1
+              }"></drawing-manager> -->
+        
+          </ngui-map>
+        
+        
+        
+        </div>
+        
+
+  </div>
+</div>
+
+
